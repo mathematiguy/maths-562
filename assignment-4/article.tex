@@ -48,226 +48,112 @@ BCOR5mm, % Binding correction
 
 \begin{document}
 
-%----------------------------------------------------------------------------------------
-%	HEADERS
-%----------------------------------------------------------------------------------------
+\title{MATH/COMP 562 ASSIGNMENT 4}
+\date{Due: April 9th (Sunday)}
+\author{Adam M. Oberman}
+\maketitle
 
-\renewcommand{\sectionmark}[1]{\markright{\spacedlowsmallcaps{#1}}} % The header for all pages (oneside) or for even pages (twoside)
-%\renewcommand{\subsectionmark}[1]{\markright{\thesubsection~#1}} % Uncomment when using the twoside option - this modifies the header on odd pages
-\lehead{\mbox{\llap{\small\thepage\kern1em\color{halfgray} \vline}\color{halfgray}\hspace{0.5em}\rightmark\hfil}} % The header style
+\section*{Generative Models}
+Refer to \url{https://udlbook.github.io/udlbook/}
 
-\pagestyle{scrheadings} % Enable the headers specified in this block
+\subsection*{Exercise 4.1 (GANs)}
 
-%----------------------------------------------------------------------------------------
-%	TABLE OF CONTENTS & LISTS OF FIGURES AND TABLES
-%----------------------------------------------------------------------------------------
-
-\maketitle % Print the title/author/date block
-
-\setcounter{tocdepth}{2} % Set the depth of the table of contents to show sections and subsections only
-
-\tableofcontents % Print the table of contents
-
-%% \listoffigures % Print the list of figures
-
-%% \listoftables % Print the list of tables
-
-%----------------------------------------------------------------------------------------
-%	ABSTRACT
-%----------------------------------------------------------------------------------------
-
-\section*{Abstract} % This section will not appear in the table of contents due to the star (\section*)
-
-This paper explores the role of artificial intelligence for natural language in supporting communities affected by colonialism to reclaim and revitalise their languages. We order well known research questions in natural language processing for low research languages by their potential impact for language reclamation, and also explain the necessary language data required for these. Availability of language data varies widely by community and also data type such as written, audio-video or image scans. Fundamentally we aim to bridge a gap between industry, where much work in this area exists, and community where data is often available but not easily utilised due to funding and technical capability gaps.
-
-%----------------------------------------------------------------------------------------
-%	AUTHOR AFFILIATIONS
-%----------------------------------------------------------------------------------------
-
-\let\thefootnote\relax\footnotetext{* \textit{PhD Student, School of Computer Science, McGill University, Montreal, Canada}}
-
-%----------------------------------------------------------------------------------------
-
-\newpage % Start the article content on the second page, remove this if you have a longer abstract that goes onto the second page
-
-%----------------------------------------------------------------------------------------
-%	INTRODUCTION
-%----------------------------------------------------------------------------------------
-
-\section{Introduction}
-
-We choose to address these issues by starting with a review of the relevant literature. We are interested in exploring literature at the intersection of computer science and the wide range of writing on language reclamation.
- 
-%----------------------------------------------------------------------------------------
-%	METHODS
-%----------------------------------------------------------------------------------------
-
-\section{Methods}
-
-We start by identifying sources, then we perform keyword searches and count the number of hits. Using multiple passes, we will settle on 50-100 papers to read for the review, at least half of which will be from the Computer Science literature.
-
-\subsection{Identified sources}
-
-For computer science, we will focus on the Association for Computational Linguistics (ACL) Anthology. I can look around more to figure out what other sources are available.
-
-Then for language revitalisation we can focus on the following:
-
-\begin{enumerate}[noitemsep]
-\item AILDI
-\item MIT-ILI
-\item ICLDC
-\item SAIL
-\item BoL (multiple)
-\item CoLang
-\item SSILA/LSA
-\item ANA
-\item EFL
-\item NSF-DEL
-\item ELDP
-\item ogmios/FEL
-\item Natives4Linguistics
-\end{enumerate}
-
-\subsection{Computer Science papers}
-
-We started by looking through the ACL anthology for papers containing the following keywords:
-
-\begin{enumerate}
-\item Language revitalisation (227 results)
-\item Language reclamation
-\item Low resource
-\end{enumerate}
-
-%------------------------------------------------
-
-\subsection{Paragraphs}
-
-\lipsum[6] % Dummy text
-
-\paragraph{Paragraph Description} \lipsum[7] % Dummy text
-
-\paragraph{Different Paragraph Description} \lipsum[8] % Dummy text
-
-%------------------------------------------------
-
-\subsection{Math}
-
-\lipsum[4] % Dummy text
-
-\begin{equation}
-\cos^3 \theta =\frac{1}{4}\cos\theta+\frac{3}{4}\cos 3\theta
-\label{eq:refname2}
-\end{equation}
-
-\lipsum[5] % Dummy text
-
-\begin{definition}[Gauss] 
-To a mathematician it is obvious that
-$\int_{-\infty}^{+\infty}
-e^{-x^2}\,dx=\sqrt{\pi}$. 
-\end{definition} 
-
-\begin{theorem}[Pythagoras]
-The square of the hypotenuse (the side opposite the right angle) is equal to the sum of the squares of the other two sides.
-\end{theorem}
-
-\begin{proof} 
-We have that $\log(1)^2 = 2\log(1)$.
-But we also have that $\log(-1)^2=\log(1)=0$.
-Then $2\log(-1)=0$, from which the proof.
-\end{proof}
-
-%----------------------------------------------------------------------------------------
-%	RESULTS AND DISCUSSION
-%----------------------------------------------------------------------------------------
-
-\section{Results and Discussion}
-
-Reference to Figure~\vref{fig:gallery}. % The \vref command specifies the location of the reference
-
-\begin{figure}[tb]
-\centering 
-\includegraphics[width=0.5\columnwidth]{GalleriaStampe} 
-\caption[An example of a floating figure]{An example of a floating figure (a reproduction from the \emph{Gallery of prints}, M.~Escher,\index{Escher, M.~C.} from \url{http://www.mcescher.com/}).} % The text in the square bracket is the caption for the list of figures while the text in the curly brackets is the figure caption
-\label{fig:gallery} 
-\end{figure}
-
-\lipsum[10] % Dummy text
-
-%------------------------------------------------
-
-\subsection{Subsection}
-
-\lipsum[11] % Dummy text
-
-\subsubsection{Subsubsection}
-
-\lipsum[12] % Dummy text
-
-\begin{description}
-\item[Word] Definition
-\item[Concept] Explanation
-\item[Idea] Text
-\end{description}
-
-\lipsum[12] % Dummy text
-
-\begin{itemize}[noitemsep] % [noitemsep] removes whitespace between the items for a compact look
-\item First item in a list
-\item Second item in a list
-\item Third item in a list
+Given a dataset of genuine images, $S_m = \{x_1, \ldots, x_m\}$. The goal is to train a generator, $x_i = g(z_i, \theta)$, to generate images $x_i \in S_m$ from noise $z_i$. This is achieved by also training a discriminator, $f(x, \phi)$, which classifies an image as genuine or generated, using the minimax training loss
+\begin{equation*}
+\max_\theta \min_\phi \mathcal{L}^S_\theta(f(x, \phi), y)
+\end{equation*}
+applied to the combined dataset, $S_\theta = S_N \cup S_G^\theta$,
+where
+\begin{itemize}
+    \item $S_N = \{(x_1, 1), \ldots, (x_m, 1)\}$, the (fixed) genuine images, with label $y = 1$,
+    \item $S_G^\theta = \{(x^\theta_1, 0), \ldots, (x^\theta_m, 0)\}$, a changing set of generated images $x^\theta_i = g(z_i, \theta)$, with label $y = 0$.
 \end{itemize}
 
-\subsubsection{Table}
+\subsubsection*{Explicit GAN loss}
 
-\lipsum[13] % Dummy text
+From \citet{prince2023understanding} the GAN loss function is as follows
 
-\begin{table}[hbt]
-\caption{Table of Grades}
-\centering
-\begin{tabular}{llr}
-\toprule
-\multicolumn{2}{c}{Name} \\
-\cmidrule(r){1-2}
-First name & Last Name & Grade \\
-\midrule
-John & Doe & $7.5$ \\
-Richard & Miles & $2$ \\
-\bottomrule
-\end{tabular}
-\label{tab:label}
-\end{table}
+%% \begin{equation*}
+%% \hat{\theta} = \textrm{argmax}_\theta \left[ \min_\phi \left[ \sum \right] \right]
+%% \end{equation*}
 
-Reference to Table~\vref{tab:label}. % The \vref command specifies the location of the reference
+\subsubsection*{Exercise 4.1 (a)}
+Write down and explain the loss for the discriminator, if the generator is fixed.
 
-%------------------------------------------------
+\subsubsection*{Solution 4.1 (a)}
+For a fixed generator, we can imagine
 
-\subsection{Figure Composed of Subfigures}
+Assuming the generator is fixed, the discriminator's goal is to correctly classify the genuine images and the generated images. The loss for the discriminator is a binary cross-entropy loss function, which measures the error of a classification model at two-class classification tasks. This loss increases as the predicted probability diverges from the actual label. The binary cross-entropy loss can be expressed as follows:
 
-Reference the figure composed of multiple subfigures as Figure~\vref{fig:esempio}. Reference one of the subfigures as Figure~\vref{fig:ipsum}. % The \vref command specifies the location of the reference
+\begin{equation}
+L(y,\hat{y}) = - \frac{1}{N} \sum_{i=1}^{N} [y_i \log(\hat{y_i}) + (1-y_i) \log(1-\hat{y_i})]
+\end{equation}
 
-\lipsum[15-18] % Dummy text
+where $y$ is the true label, $\hat{y}$ is the predicted label, and $N$ is the number of samples.
 
-\begin{figure}[tb]
-\centering
-\subfloat[A city market.]{\includegraphics[width=.45\columnwidth]{Lorem}} \quad
-\subfloat[Forest landscape.]{\includegraphics[width=.45\columnwidth]{Ipsum}\label{fig:ipsum}} \\
-\subfloat[Mountain landscape.]{\includegraphics[width=.45\columnwidth]{Dolor}} \quad
-\subfloat[A tile decoration.]{\includegraphics[width=.45\columnwidth]{Sit}}
-\caption[A number of pictures.]{A number of pictures with no common theme.} % The text in the square bracket is the caption for the list of figures while the text in the curly brackets is the figure caption
-\label{fig:esempio}
-\end{figure}
+\subsubsection*{Exercise 4.1 (b)}
+Write down and explain the loss (or gain, since it is a maximization) for the generator, if the discriminator is fixed.
+
+\subsubsection*{Solution 4.1 (b)}
+The generator's loss function is also the binary cross-entropy loss function. However, the goal is the opposite, i.e., it tries to maximize this loss. The generator wants the discriminator to incorrectly classify its generated images as genuine. Thus, when the discriminator is fixed, the generator tries to generate images that look more like the genuine images to trick the discriminator.
+
+\subsubsection*{Exercise 4.1 (c)}
+Characterize the saddle points of the loss. If the generator outputs the full set of genuine images, is this optimal? What if the generator outputs just a subset of the genuine images?
+
+A saddle point, $(\theta, \phi)$, is a point where (i) if we fix $\phi$ and change $\theta$, we cannot further increase the loss, and (ii) if we fix $\theta$ and change $\phi$, we cannot further decrease the loss.
+
+\subsubsection*{Solution 4.1 (c)}
+Saddle points are the points where the gradient of the loss function equals zero, i.e., the function is neither entirely convex nor entirely concave. If the generator outputs the full set of genuine images, this is not optimal, as the generator is not adding any new information. Similarly, if the generator only outputs a subset of the genuine images, it may not be optimizing the diversity of the generated images, which is also not optimal.
+
+\subsection*{Exercise 4.2 (Diffusion generative models)}
+Given the dataset $S_m = \{x_1 , \ldots , x_m \}$, the goal is to generate images from the dataset. The inputs are a finite set of numbers $\alpha_t , t \in T$ and a finite set of noise vectors $\zeta_j , j \in J$.
+
+The outputs are a set of models, $g_t : X \rightarrow X$, $g_t (x) = g(x, t), t \in T$.
+
+For each $t \in T$ , let $S_t = \{x_{t,i,j}\}, i = 1, \ldots , m, j \in J$ be the dataset of t-noisy images, $x_{t,i,j} = \sqrt{\alpha_t} x_i + \sqrt{1 - \alpha_t} \zeta_j$
+
+The training loss for $g_t$ is given by
+\begin{equation*}
+\mathcal{L} S_t (g_t ) = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g_t (x_{t,i,j} ) - \zeta_j ||^2
+\end{equation*}
+
+Define the closest point map
+\begin{equation*}
+g_{CP}(x) = g_{CP} (x, S_m ) = \arg \min_{x_i \in S_m} ||x - x_i ||^2
+\end{equation*}
+
+\subsubsection*{Exercise 4.2 (a)}
+Assume that, for each $x_{t,i,j} \in S_t$, $g_{CP}(x_{t,i,j}) = x_i$. Find the loss minimizer $g^*_t$ and show that the loss is zero.
+
+\subsubsection*{Solution to Exercise 4.2 (a)}
+This requires a specific calculation or a specific dataset to answer more accurately. The answer might be based on the characteristics of the dataset and the model's architecture.
+
+\subsubsection*{Exercise 4.2 (b)}
+In the case above, are there any other loss minimizers?
+
+\subsubsection*{Solution to Exercise 4.2 (b)}
+This question also requires more specific details about the dataset or the model's architecture to provide a complete and accurate answer.
+
+\subsubsection*{Exercise 4.2 (c)}
+How do the loss minimizers for this generative model compare to the loss minimizers for GANs? Which is better in terms of coverage of the dataset?
+
+\subsubsection*{Solution to Exercise 4.2 (c)}
+The comparison between the loss minimizers for this generative model and the loss minimizers for GANs is largely dependent on the specific characteristics of the models and the dataset.
+
+\subsection*{Exercise 4.3 (Normalizing Flows: transformation of densities)}
+Problems 16.1 and 16.2 from ”Understanding Deep Learning”
+
+\subsection*{Exercise 4.4 (Normalizing Flows: Fixed point theorem)}
+Problem 16.11 from Chapter 16 of ”Understanding Deep Learning”
+
+\subsection*{Exercise 4.5 (Diffusion generative models)}
+Problems 18.1 and 18.2 from Chapter 18 of ”Understanding Deep Learning”
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
 
-\renewcommand{\refname}{\spacedlowsmallcaps{References}} % For modifying the bibliography heading
-
-\bibliographystyle{unsrt}
-
 \bibliography{sample.bib} % The file containing the bibliography
 
-%----------------------------------------------------------------------------------------
 
 \end{document}
