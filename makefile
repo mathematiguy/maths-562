@@ -7,7 +7,7 @@ SINGULARITY_ARGS ?=
 
 .PHONY: sandbox container shell root-shell docker docker-push docker-pull enter enter-root
 
-assignment-4/article.pdf:
+assignment-4/article.pdf: assignment-4/article.tex
 	${RUN} bash -c "cd assignment-4 && latexmk article.tex -pdf"
 
 clean:
