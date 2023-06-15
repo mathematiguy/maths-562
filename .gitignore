@@ -1,1 +1,9 @@
-/maths-562.sif
+*.sif
+**/*.aux
+**/*.bbl
+**/*.blg
+**/*.fdb_latexmk
+**/*.fls
+**/*.log
+**/*.out
+**/*.pdf
