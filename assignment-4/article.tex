@@ -108,13 +108,21 @@ Write down and explain the loss (or gain, since it is a maximization) for the ge
 
 \subsubsection*{Solution 4.1 (b)}
 
-For a fixed discriminator, we can ignore the $\min$ part of the GAN loss - for example by assuming $\phi$ is already optimal. We can think of $D(x, \phi)$ as $D_\phi(x)$ (we are bringing the $\phi$ into the function, since now it can't vary). In this scenario the GAN problem requires us to find the optimal $\hat{\theta}$ satisfying below:
+From \citet{prince2023understanding} 15.5 the generator gain function is given by:
 
 \begin{equation*}
-  \sum_j \log(1 - D_{\phi}(G(z_j, \theta)))
+  L(\theta) = - \sum_j \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi)\right)
 \end{equation*}
 
-So we are trying to maximise the binary cross-entropy loss of the classification task. The generator wants the discriminator to incorrectly classify the generated images as genuine.
+where, as before ``$\textrm{sig}$'' represents the sigmoid function.
+
+For a fixed discriminator, we can let $D_\phi(x) = \textrm{sig}(f(x, \phi))$ (we are bringing the $\phi$ into the function, since now it can't vary). In this scenario the GAN problem requires us to find the optimal $\hat{\theta}$ satisfying below:
+
+\begin{equation*}
+  L(\theta) = - \sum_j \log(1 - D_{\phi}(g(z_j, \theta)))
+\end{equation*}
+
+The purpose of the generator gain function is to reward the generator for samples that are assigned high probability by the discriminator.
 
 \subsubsection*{Exercise 4.1 (c)}
 Characterize the saddle points of the loss. If the generator outputs the full set of genuine images, is this optimal? What if the generator outputs just a subset of the genuine images?
