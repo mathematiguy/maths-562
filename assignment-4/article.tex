@@ -212,9 +212,7 @@ Suppose there are two different minimizers $g^t$ and $h^t$ of the loss. They bot
   ||g^t(x_{t,i,j}) - \epsilon_j||^2 = ||h^t(x_{t,i,j}) - \epsilon_j||^2 = 0
 \end{equation*}
 
-This implies that $g^t(x{t,i,j}) = h^t(x{t,i,j}) = \epsilon_j$ for all $i$ and $j$.
-
-Therefore, if $g^t$ and $h^t$ are both loss minimizers for $\hat{L}_{S^t}$, they must be equal. Therefore $g^*_t$ is unique.
+This implies that $g^t(x_{t,i,j}) = h^t(x_{t,i,j}) = \epsilon_j$ for all $i$ and $j$. Therefore, if $g^t$ and $h^t$ are both loss minimizers for $\hat{L}_{S^t}$, they must be equal. Therefore $g^*_t$ is unique.
 
 \subsubsection*{Exercise 4.2 (c)}
 How do the loss minimizers for this generative model compare to the loss minimizers for GANs? Which is better in terms of coverage of the dataset?
