@@ -228,7 +228,24 @@ In terms of dataset coverage, diffusion generative models generally perform bett
 \newpage
 
 \subsection*{Exercise 4.3 (Normalizing Flows: transformation of densities)}
-Problems 16.1 and 16.2 from ”Understanding Deep Learning”
+
+All problems in this section are drawn from ``Understanding Deep Learning'' \citet{prince2023understanding}.
+
+\subsubsection*{Problem 16.1}
+
+Consider transforming a uniform base density defined on $z\in[0,1]$ using the function $x = f[z] = z^2$. Find an expression for the transformed distribution $Pr(x)$.
+
+\subsubsection*{Problem 16.1 solution}
+
+Let $P_Z$ be the probability density of $z$, then $P_Z = 1$, since $z\sim U[0,1]$.
+
+Now let $x = z^2$, then $z = \sqrt{x}$, and $\frac{dz}{dx} = \frac{1}{2\sqrt{x}}$. Let $P_X$ be the probability density of $x$. Lastly we use the change of variables formula for probability densities:
+
+\begin{align*}
+  p_X(x) &= p_Z(z) \left|\frac{dz}{dx}\right| \\
+  &= 1 \cdot \left| \frac{1}{2 \sqrt{x}} \right| = \frac{1}{2\sqrt{x}}
+\end{align*}
+
 
 \subsection*{Exercise 4.4 (Normalizing Flows: Fixed point theorem)}
 Problem 16.11 from Chapter 16 of ”Understanding Deep Learning”
