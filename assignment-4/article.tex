@@ -88,20 +88,20 @@ Write down and explain the loss for the discriminator, if the generator is fixed
 From \citet{prince2023understanding} 15.5 the discriminator loss function is given by:
 
 \begin{equation*}
-  L(\phi) = \sum_j - \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi)\right) - \sum_i log\left(\textrm{sig}(f(x_i, \phi))\right)
+  L(\phi) = - \sum_j \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi)\right) - \sum_i log\left(\textrm{sig}(f(x_i, \phi))\right)
 \end{equation*}
 
-where $\textrm{sig}$ represents the sigmoid function.
+where ``$\textrm{sig}$'' represents the sigmoid function.
 
 For a fixed generator, we can imagine each $g(z_i, \theta) = \hat{x}_i$ where $\hat{x}_i$ is an image generated according to $g$ which approximates $x_i$. We can simplify further if we let $D(x, \phi) = \textrm{sig}(f(x, \phi))$, basically considering the sigmoid classification layer as part of the discriminator function.
 
 This gives us the loss function below:
 
 \begin{equation*}
-  L(\phi) = \sum_j - \log(1 - D(\hat{x}_j, \phi)) - \sum_i log(D(x_i, \phi))
+  L(\phi) = - \sum_j \log(1 - D(\hat{x}_j, \phi)) - \sum_i log(D(x_i, \phi))
 \end{equation*}
 
-The result is a binary cross-entropy loss where the goal is to distinguish $x_i$ from $\hat{x}_i$.
+The result is a binary cross-entropy loss where the goal is to distinguish $x_i$ from $\hat{x}_i$. Real samples $x_i$ decrease the loss by $log(D(x_i, \phi))$ while generated samples increase the loss by $\log(1-D(\hat{x}_j, \phi))$.
 
 \subsubsection*{Exercise 4.1 (b)}
 Write down and explain the loss (or gain, since it is a maximization) for the generator, if the discriminator is fixed.
