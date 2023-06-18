@@ -28,6 +28,10 @@ headinclude,footinclude, % Extra spacing for the header and footer
 BCOR5mm, % Binding correction
 ]{scrartcl}
 
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
+\DeclareMathOperator*{\sig}{sig}
+
 \input{structure.tex} % Include the structure.tex file which specified the document structure and layout
 
 \hyphenation{Fortran hy-phen-ation} % Specify custom hyphenation points in words with dashes where you would like hyphenation to occur, or alternatively, don't put any dashes in a word to stop hyphenation altogether
@@ -130,7 +134,20 @@ Characterize the saddle points of the loss. If the generator outputs the full se
 A saddle point, $(\theta, \phi)$, is a point where (i) if we fix $\phi$ and change $\theta$, we cannot further increase the loss, and (ii) if we fix $\theta$ and change $\phi$, we cannot further decrease the loss.
 
 \subsubsection*{Solution 4.1 (c)}
-Saddle points are the points where the gradient of the loss function equals zero, i.e., the function is neither entirely convex nor entirely concave. If the generator outputs the full set of genuine images, this is not optimal, as the generator is not adding any new information. Similarly, if the generator only outputs a subset of the genuine images, it may not be optimizing the diversity of the generated images, which is also not optimal.
+
+The saddle points of the GAN loss function are solutions to the following minimax problem, as described in \citet{prince2023understanding} equation 15.4:
+
+\begin{equation*}
+\hat{\theta} = \argmax_\theta \left[ \min_\phi \left[ \sum_j - \log(1 - \sig(f(g(z_j, \theta), \phi))) - \sum_i \log(\sig(f(x_i, \phi))) \right] \right]
+\end{equation*}
+
+This represents the Nash equilibrium in the minimax game between the generator and the discriminator.
+
+If the generator produces the full set of genuine images, the discriminator could learn to memorize the genuine images and achieve perfect discrimination. In this scenario the generator would not be optimal.
+
+If however the generator only produces a subset of the genuine images, then it is sub-optimal. This phenomenon is referred to as as "mode collapse", where the generator learns to generate only a limited variety of samples.
+
+\newpage
 
 \subsection*{Exercise 4.2 (Diffusion generative models)}
 Given the dataset $S_m = \{x_1 , \ldots , x_m \}$, the goal is to generate images from the dataset. The inputs are a finite set of numbers $\alpha_t , t \in T$ and a finite set of noise vectors $\zeta_j , j \in J$.
