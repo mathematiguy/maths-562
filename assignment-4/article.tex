@@ -218,7 +218,14 @@ This implies that $g^t(x_{t,i,j}) = h^t(x_{t,i,j}) = \epsilon_j$ for all $i$ and
 How do the loss minimizers for this generative model compare to the loss minimizers for GANs? Which is better in terms of coverage of the dataset?
 
 \subsubsection*{Solution to Exercise 4.2 (c)}
-The comparison between the loss minimizers for this generative model and the loss minimizers for GANs is largely dependent on the specific characteristics of the models and the dataset.
+
+In GANs, the generator aims to fool the discriminator by producing outputs that are indistinguishable from the real data, thus the loss minimizer corresponds to a generator that perfectly replicates the real data distribution. However, GANs can suffer from mode collapse, where they only generate a small subset of the real data, failing to cover the entire data distribution.
+
+In contrast, diffusion generative add noise to the real data and learns to reverse this process, mapping noised images back to the originals. In this case, the loss minimizer is a deterministic function that directly maps the noisy data back to the closest point in the original dataset. This approach virtually guarantees coverage over the original data, as long as the original images are not too close together.
+
+In terms of dataset coverage, diffusion generative models generally perform better. They more directly address mode collapse, which is a notable issue with GANs.
+
+\newpage
 
 \subsection*{Exercise 4.3 (Normalizing Flows: transformation of densities)}
 Problems 16.1 and 16.2 from ”Understanding Deep Learning”
