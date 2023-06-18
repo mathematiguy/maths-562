@@ -69,33 +69,54 @@ where
     \item $S_G^\theta = \{(x^\theta_1, 0), \ldots, (x^\theta_m, 0)\}$, a changing set of generated images $x^\theta_i = g(z_i, \theta)$, with label $y = 0$.
 \end{itemize}
 
-\subsubsection*{Explicit GAN loss}
+%% \subsubsection*{Explicit GAN loss}
 
-From \citet{prince2023understanding} the GAN loss function is as follows
+%% From \citet{prince2023understanding} the GAN loss function is as follows:
 
+%% %% This is the characterisation of the saddle points
 %% \begin{equation*}
-%% \hat{\theta} = \textrm{argmax}_\theta \left[ \min_\phi \left[ \sum \right] \right]
+%% \hat{\theta} = \textrm{argmax}_\theta \left[ \min_\phi \left[ \sum_j - \log(1 - D(G(z_j, \theta), \phi))) - \sum_i \log(D(x_i, \phi))) \right] \right]
 %% \end{equation*}
+
+%% where $\theta$ represents the weights of the generator function $G$, and $\phi$ is the weights of the discriminator $D$, and $\sigma$ is the sigmoid logistic function.
 
 \subsubsection*{Exercise 4.1 (a)}
 Write down and explain the loss for the discriminator, if the generator is fixed.
 
 \subsubsection*{Solution 4.1 (a)}
-For a fixed generator, we can imagine
 
-Assuming the generator is fixed, the discriminator's goal is to correctly classify the genuine images and the generated images. The loss for the discriminator is a binary cross-entropy loss function, which measures the error of a classification model at two-class classification tasks. This loss increases as the predicted probability diverges from the actual label. The binary cross-entropy loss can be expressed as follows:
+From \citet{prince2023understanding} 15.5 the discriminator loss function is given by:
 
-\begin{equation}
-L(y,\hat{y}) = - \frac{1}{N} \sum_{i=1}^{N} [y_i \log(\hat{y_i}) + (1-y_i) \log(1-\hat{y_i})]
-\end{equation}
+\begin{equation*}
+  L(\phi) = \sum_j - \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi)\right) - \sum_i log\left(\textrm{sig}(f(x_i, \phi))\right)
+\end{equation*}
 
-where $y$ is the true label, $\hat{y}$ is the predicted label, and $N$ is the number of samples.
+where $\textrm{sig}$ represents the sigmoid function.
+
+For a fixed generator, we can imagine each $g(z_i, \theta) = \hat{x}_i$ where $\hat{x}_i$ is an image generated according to $g$ which approximates $x_i$. We can simplify further if we let $D(x, \phi) = \textrm{sig}(f(x, \phi))$, basically considering the sigmoid classification layer as part of the discriminator function.
+
+This gives us the loss function below:
+
+\begin{equation*}
+  L(\phi) = \sum_j - \log(1 - D(\hat{x}_j, \phi)) - \sum_i log(D(x_i, \phi))
+\end{equation*}
+
+The result is a binary cross-entropy loss where the goal is to distinguish $x_i$ from $\hat{x}_i$.
 
 \subsubsection*{Exercise 4.1 (b)}
 Write down and explain the loss (or gain, since it is a maximization) for the generator, if the discriminator is fixed.
 
 \subsubsection*{Solution 4.1 (b)}
-The generator's loss function is also the binary cross-entropy loss function. However, the goal is the opposite, i.e., it tries to maximize this loss. The generator wants the discriminator to incorrectly classify its generated images as genuine. Thus, when the discriminator is fixed, the generator tries to generate images that look more like the genuine images to trick the discriminator.
+
+
+
+For a fixed discriminator, we can ignore the $\min$ part of the GAN loss - for example by assuming $\phi$ is already optimal. We can think of $D(x, \phi)$ as $D_\phi(x)$ (we are bringing the $\phi$ into the function, since now it can't vary). In this scenario the GAN problem requires us to find the optimal $\hat{\theta}$ satisfying below:
+
+\begin{equation*}
+  \sum_j \log(1 - D_{\phi}(G(z_j, \theta)))
+\end{equation*}
+
+So we are trying to maximise the binary cross-entropy loss of the classification task. The generator wants the discriminator to incorrectly classify the generated images as genuine.
 
 \subsubsection*{Exercise 4.1 (c)}
 Characterize the saddle points of the loss. If the generator outputs the full set of genuine images, is this optimal? What if the generator outputs just a subset of the genuine images?
