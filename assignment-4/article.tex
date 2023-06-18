@@ -311,10 +311,43 @@ Then using the change of variables formula from before:
 %% This is the probability density function of the transformed distribution.
 
 \subsection*{Exercise 4.4 (Normalizing Flows: Fixed point theorem)}
-Problem 16.11 from Chapter 16 of ”Understanding Deep Learning”
+
+\subsubsection*{Problem 16.11}
+
+Write out the expression for the KL divergence in the equation:
+
+\begin{equation*}
+  \phi = \argmin \left[ KL \left[ \sum_{i=1}^I \delta[x-f[z_i,\phi]] || q(x) \right] \right]
+\end{equation*}
+
+Why does it not matter if we can only evaluate the probability q(x) up to a scaling factor $\kappa$? Does the network have to be invertible to minimize this loss function? Explain your reasoning.
 
 \subsection*{Exercise 4.5 (Diffusion generative models)}
-Problems 18.1 and 18.2 from Chapter 18 of ”Understanding Deep Learning”
+
+\subsubsection*{Problem 18.1}
+
+Show that if $Var[x_{t-1}] = \textbf{I}$ and we use the update:
+
+\begin{equation*}
+  x_t = \sqrt{1-\beta_t}\cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t,
+\end{equation*}
+
+then $Var[x_t] = \textbf{I}$ so the variance stays the same.
+
+\subsubsection*{Problem 18.2}
+
+Consider the variable:
+
+$$z = a \cdot \epsilon_1 + b \cdot \epsilon_2$$
+
+where both $\epsilon_1$ and $\epsilon_2$ are drawn from independent standard normal distributions with mean zero and unit variance. Show that:
+
+\begin{align*}
+  \mathbb{E}[z] &= 0 \\
+  Var[z] &= a^2 + b^2
+\end{align*}
+
+so we could equivalently compute $z = \sqrt{a^2 + b^2} \cdot \epsilon$ where $\epsilon$ is also drawn from a standard normal distribution.
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
