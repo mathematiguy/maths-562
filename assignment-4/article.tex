@@ -30,6 +30,7 @@ BCOR5mm, % Binding correction
 
 \usepackage{amsmath}
 \DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
+\DeclareMathOperator*{\argmin}{argmin} % thin space, limits underneath in displays
 \DeclareMathOperator*{\sig}{sig}
 
 \input{structure.tex} % Include the structure.tex file which specified the document structure and layout
@@ -150,33 +151,70 @@ If however the generator only produces a subset of the genuine images, then it i
 \newpage
 
 \subsection*{Exercise 4.2 (Diffusion generative models)}
-Given the dataset $S_m = \{x_1 , \ldots , x_m \}$, the goal is to generate images from the dataset. The inputs are a finite set of numbers $\alpha_t , t \in T$ and a finite set of noise vectors $\zeta_j , j \in J$.
+Given the dataset $S_m = \{x_1 , \ldots , x_m \}$, the goal is to generate images from the dataset. The inputs are a finite set of numbers $\alpha_t , t \in T$ and a finite set of noise vectors $\epsilon_j$ for $j \in J$.
 
-The outputs are a set of models, $g_t : X \rightarrow X$, $g_t (x) = g(x, t), t \in T$.
+The outputs are a set of models, $g_t : \mathcal{X} \rightarrow \mathcal{X}$, $g_t (x) = g(x, t)$ for $t \in T$.
 
-For each $t \in T$ , let $S_t = \{x_{t,i,j}\}, i = 1, \ldots , m, j \in J$ be the dataset of t-noisy images, $x_{t,i,j} = \sqrt{\alpha_t} x_i + \sqrt{1 - \alpha_t} \zeta_j$
+For each $t \in T$ , let $S_t = \{x_{t,i,j}\}, i = 1, \ldots , m$ for $j \in J$ be the dataset of t-noisy images, $x_{t,i,j} = \sqrt{\alpha_t} x_i + \sqrt{1 - \alpha_t} \epsilon_j$
 
 The training loss for $g_t$ is given by
 \begin{equation*}
-\mathcal{L} S_t (g_t ) = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g_t (x_{t,i,j} ) - \zeta_j ||^2
+\hat{L}_{S_t}(g_t) = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g_t (x_{t,i,j} ) - \epsilon_j ||^2
 \end{equation*}
 
 Define the closest point map
 \begin{equation*}
-g_{CP}(x) = g_{CP} (x, S_m ) = \arg \min_{x_i \in S_m} ||x - x_i ||^2
+  g^{CP}(x) = g^{CP}(x, S^m) = \argmin_{x_i \in S^m} ||x - x_i||^2
 \end{equation*}
 
 \subsubsection*{Exercise 4.2 (a)}
-Assume that, for each $x_{t,i,j} \in S_t$, $g_{CP}(x_{t,i,j}) = x_i$. Find the loss minimizer $g^*_t$ and show that the loss is zero.
+Assume that, for each $x_{t,i,j} \in S_t$, $g^{CP}(x_{t,i,j}) = x_i$. Find the loss minimizer $g^*_t$ and show that the loss is zero.
 
 \subsubsection*{Solution to Exercise 4.2 (a)}
-This requires a specific calculation or a specific dataset to answer more accurately. The answer might be based on the characteristics of the dataset and the model's architecture.
+In this argument we will show that under the given assumption, the noise vector $\epsilon_j$ can be retrieved from $x_{t,i,j}$, and this fact can be used to construct a loss minimizing function.
+
+The training loss is the mean squared error between the output of $g_t(x_{t,i,j})$ and the noise vectors $\epsilon_j$:
+
+\begin{equation*}
+  \hat{L}_{S_t}(g_t) = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g_t (x_{t,i,j} ) - \epsilon_j ||^2
+\end{equation*}
+
+Minimizing this loss amounts to minimizing $||g_t (x_{t,i,j})-\epsilon_j||^2$ for every $i = 1, ..., m$, and every $j \in J$.
+
+Since $x_{t,i,j} = \sqrt{\alpha_t}x_i + \sqrt{1-\alpha_t}\epsilon_j$, rearranging for $\epsilon_j$ we can construct a new function $g^*$ which will depend only on $x_{t,i,j}$ and $t$:
+
+\begin{align*}
+  \epsilon_j &= \frac{x_{t,i,j} - \sqrt{\alpha_t}x_i}{\sqrt{1-\alpha_t}} \\
+   &= \frac{x_{t,i,j} - \sqrt{\alpha_t} \cdot \argmin_{x_k \in S^m} ||x_{t,i,j}-x_k||^2}{\sqrt{1-\alpha_t}} \\
+  &= g^*_t(x_{t,i,j})
+\end{align*}
+
+Where we take advantage of the fact that $g^{CP}(x_{t,i,j}) = x_i$ to remove the dependency on $x_i$. By construction $g$ depends only on $x_{t,i,j}$ and $t$. This means $g^*_t(x)$ is a viable candidate minimizer for the loss $\hat{L}_{S_t}$.
+
+Lastly we show that $g^*_t$ minimizes $\hat{L}_{S_t}$:
+
+\begin{align*}
+  \hat{L}_{S_t}(g^*_t) &= \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g^*_t (x_{t,i,j} ) - \epsilon_j ||^2 \\
+  &= \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||\epsilon_j - \epsilon_j ||^2 \\
+  &= \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} 0 = 0
+\end{align*}
+
+Since the loss is non-negative, we can conclude that $g^*_t$ minimizes the loss.
 
 \subsubsection*{Exercise 4.2 (b)}
 In the case above, are there any other loss minimizers?
 
 \subsubsection*{Solution to Exercise 4.2 (b)}
-This question also requires more specific details about the dataset or the model's architecture to provide a complete and accurate answer.
+
+Suppose there are two different minimizers $g^t$ and $h^t$ of the loss. They both achieve the minimum loss, which is zero. So for all $i = 1, ..., m$ and for all $j \in J$,
+
+\begin{equation*}
+  ||g^t(x_{t,i,j}) - \epsilon_j||^2 = ||h^t(x_{t,i,j}) - \epsilon_j||^2 = 0
+\end{equation*}
+
+This implies that $g^t(x{t,i,j}) = h^t(x{t,i,j}) = \epsilon_j$ for all $i$ and $j$.
+
+Therefore, if $g^t$ and $h^t$ are both loss minimizers for $\hat{L}_{S^t}$, they must be equal. Therefore $g^*_t$ is unique.
 
 \subsubsection*{Exercise 4.2 (c)}
 How do the loss minimizers for this generative model compare to the loss minimizers for GANs? Which is better in terms of coverage of the dataset?
