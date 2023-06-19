@@ -339,6 +339,19 @@ where both $\epsilon_1$ and $\epsilon_2$ are drawn from independent standard nor
 
 so we could equivalently compute $z = \sqrt{a^2 + b^2} \cdot \epsilon$ where $\epsilon$ is also drawn from a standard normal distribution.
 
+\subsubsection*{Problem 18.2 solution}
+
+$\mathbb{E}[z] = 0$ holds by linearity of expectation since $\mathbb{E}[\epsilon_1] = \mathbb{E}[\epsilon_2] = 0$.
+
+We calculate $Var[z]$ by hand, using the facts that $\epsilon_1$ and $\epsilon_2$ are independent, so $Cov[\epsilon_1, \epsilon_2] = 0$, and $Var[\epsilon_1] = Var[\epsilon_2] = 1$.
+
+\begin{align*}
+  Var[z] &= Var[a \epsilon_1 + b \epsilon_2] \\
+  &= a^2 Var[\epsilon_1] + b^2 Var[\epsilon_2] + 2ab Cov[\epsilon_1, \epsilon_2] \\
+  &= a^2 Var[\epsilon_1] + b^2 Var[\epsilon_2] \\
+  &= a^2 + b^2
+\end{align*}
+
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
