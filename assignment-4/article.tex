@@ -289,6 +289,26 @@ Write out the expression for the KL divergence in the equation:
 
 Why does it not matter if we can only evaluate the probability q(x) up to a scaling factor $\kappa$? Does the network have to be invertible to minimize this loss function? Explain your reasoning.
 
+\subsubsection*{Problem 16.11 solution}
+
+Writing out the KL divergence in full gives:
+
+\begin{equation*}
+  \phi = \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{q(x)} dx \right]
+\end{equation*}
+
+If we replace $q(x)$ with $\kappa q(x)$ in the above equation it can be factored out as an additive constant in the following way:
+
+\begin{align*}
+  \phi &= \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{\kappa q(x)} dx \right] \\
+  &= \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{q(x)} dx - \log \kappa \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] dx \right] \\
+  &= \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{q(x)} dx - \log \kappa \right]
+\end{align*}
+
+Where the last line holds since the probability density $\sum_{i-1}^I \delta[x-f[z_i,\phi]]$ integrates to 1 over its domain. Since the result of multiplying $q(x)$ by a constant $\kappa$ only adds a constant term to the KL-divergence, the $\phi$ which minimizes this divergence is the same.
+
+The network does not need to be invertible to minimize the KL divergence. Since we generate the samples $x_i = f[z_i , \phi]$ directly from the latent variables $z_i$, we do not need to perform an inverse operation from the data space to the latent space, which would require the network to be invertible.
+
 \subsection*{Exercise 4.5 (Diffusion generative models)}
 
 \subsubsection*{Problem 18.1}
