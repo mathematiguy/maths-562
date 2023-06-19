@@ -270,45 +270,12 @@ Then using the change of variables formula from before:
 
 \begin{align*}
   p_X(x) &= p_Z(z) \left|\frac{dz}{dx}\right| \\
-  &= \frac{1}{\sqrt{2\pi}} \exp \left[-\frac{1}{2}(\log(x(1-x)))^2 \right] \cdot \frac{1-2x}{x(1-x)} \\
-  &= \frac{1}{\sqrt{2\pi}} \exp \left[\log(x(1-x)))^{-\frac{1}{2} \cdot 2} \right] \cdot \frac{1-2x}{x(1-x)} \\
-  &= \frac{1}{\sqrt{2\pi}} \exp \left[\log\left(\frac{1}{x(1-x)}\right) \right] \cdot \frac{1-2x}{x(1-x)} \\
-  &= \frac{1}{\sqrt{2\pi}} \frac{1}{x(1-x)} \cdot \frac{1-2x}{x(1-x)} \\
-  &= \frac{1}{\sqrt{2\pi}} \frac{1-2x}{x^2(1-x)^2}
+  &= \frac{1}{\sqrt{2\pi}} \exp \left[-\frac{1}{2}(\log(x(1-x)))^2 \right] \cdot \frac{|1-2x|}{x(1-x)}
 \end{align*}
 
-%% \subsubsection*{Problem 16.2 solution - attempt 2}
+The expression looks a bit nasty but I don't think it's possible to simplify further.
 
-%% Given the standard normal distribution:
-%% \begin{equation*}
-%%   Pr(z) = \frac{1}{\sqrt{2\pi}} \exp \left[-\frac{z^2}{2}\right]
-%% \end{equation*}
-
-%% And the function:
-%% \begin{equation*}
-%%   x = f[z] = \frac{1}{1 + \exp[-z]}
-%% \end{equation*}
-
-%% We can derive the inverse function $f^{-1}(x)$:
-%% \begin{equation*}
-%%   z = f^{-1}(x) = -\log \left(\frac{1}{x} - 1\right)
-%% \end{equation*}
-
-%% The formula for the change of variables in probability densities is:
-
-%% \begin{equation*}
-%%   Pr(x) = Pr(f^{-1}(x)) \left| \frac{df^{-1}(x)}{dx} \right|
-%% \end{equation*}
-
-%% By differentiating $f^{-1}(x)$ with respect to $x$, we get $\frac{df^{-1}(x)}{dx} = \frac{1}{x(1-x)}$.
-
-%% Substituting $f^{-1}(x)$ and $\frac{df^{-1}(x)}{dx}$ into the formula, we get:
-
-%% \begin{equation*}
-%%   Pr(x) = \frac{1}{\sqrt{2\pi}} \exp \left[-\frac{(-\ln(\frac{1}{x} - 1))^2}{2}\right] \cdot \frac{1}{x(1-x)}
-%% \end{equation*}
-
-%% This is the probability density function of the transformed distribution.
+\newpage
 
 \subsection*{Exercise 4.4 (Normalizing Flows: Fixed point theorem)}
 
