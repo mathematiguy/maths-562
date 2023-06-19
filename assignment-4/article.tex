@@ -323,6 +323,18 @@ Show that if $Var[x_{t-1}] = \textbf{I}$ and we use the update:
 
 then $Var[x_t] = \textbf{I}$ so the variance stays the same.
 
+\subsubsection*{Problem 18.1 solution}
+
+We proceed by calculating $Var[x_t]$ using the standard laws of variance. In addition, we use the fact that $x_{t-1}$ and $\epsilon_t$ are independent, and that $Var[\epsilon_t] = \textbf{I}$ since $\epsilon_t$ is drawn from a standard multivariate normal distribution.
+
+\begin{align*}
+  Var[x_t] &= Var[\sqrt{1-\beta_t}\cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t] \\
+  &= Var[\sqrt{1-\beta_t}\cdot x_{t-1}] + Var[\sqrt{\beta_t} \cdot \epsilon_t] \\
+  &= (1-\beta_t) Var[x_{t-1}] + \beta_t Var[ \cdot \epsilon_t] \\
+  &= (1-\beta_t) \textbf{I} + \beta_t \textbf{I} \\
+  &= \textbf{I}
+\end{align*}
+
 \subsubsection*{Problem 18.2}
 
 Consider the variable:
