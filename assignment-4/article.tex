@@ -74,17 +74,6 @@ where
     \item $S_G^\theta = \{(x^\theta_1, 0), \ldots, (x^\theta_m, 0)\}$, a changing set of generated images $x^\theta_i = g(z_i, \theta)$, with label $y = 0$.
 \end{itemize}
 
-%% \subsubsection*{Explicit GAN loss}
-
-%% From \citet{prince2023understanding} the GAN loss function is as follows:
-
-%% %% This is the characterisation of the saddle points
-%% \begin{equation*}
-%% \hat{\theta} = \textrm{argmax}_\theta \left[ \min_\phi \left[ \sum_j - \log(1 - D(G(z_j, \theta), \phi))) - \sum_i \log(D(x_i, \phi))) \right] \right]
-%% \end{equation*}
-
-%% where $\theta$ represents the weights of the generator function $G$, and $\phi$ is the weights of the discriminator $D$, and $\sigma$ is the sigmoid logistic function.
-
 \subsubsection*{Exercise 4.1 (a)}
 Write down and explain the loss for the discriminator, if the generator is fixed.
 
