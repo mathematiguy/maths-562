@@ -88,10 +88,8 @@ Let $\mathcal{H}_{\max} = \{\max(h, h_0 ): h \in \mathcal{H}, h_0 \in \mathcal{H
 Now we calculate the Rademacher complexity of $\mathcal{H}_{\max}$:
 
 \begin{align}
-%% \mathfrak{R}_m(\mathcal{H}_{\max}) &= \mathbb{E}\left[\sup_{g\in\mathcal{H}{\max}}\frac{1}{m} \sum_{i=1}^m \sigma_i g(z_i)\right] \\
 \mathfrak{R}_m(\mathcal{H}_{\max}) &= \mathbb{E} \left[ \sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i \max(h(z_i), h_0(z_i)) \right] \\
 &= \mathbb{E} \left[ \sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \frac{\sigma_i}{2} (h(z_i) + h_0(z_i) + |h(z_i) - h_0(z_i)|) \right] \\
-%% &\leq \mathbb{E} \left[ \sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{2m} \sum_{i=1}^m \sigma_i (h(z_i) + h_0(z_i)) + \frac{1}{2m} \sum_{i=1}^m \sigma_i |h(z_i) - h_0(z_i)| \right] \\
 &\leq \frac{1}{2} \mathbb{E}\left[ \sup_{h\in\mathcal{H}}\frac{1}{m} \sum_{i=1}^m \sigma_i h(z_i)\right] + \mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0}\frac{1}{m} \sum_{i=1}^m \sigma_i h_0(z_i)\right] + \\
 &\qquad \frac{1}{2} \mathbb{E}\left[\sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i |h(z_i) - h_0(z_i)|\right] \\
 &\leq \frac{1}{2} \mathbb{E}\left[ \sup_{h\in\mathcal{H}}\frac{1}{m} \sum_{i=1}^m \sigma_i h(z_i)\right] + \frac{1}{2}\mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0}\frac{1}{m} \sum_{i=1}^m \sigma_i h_0(z_i)\right] + \\
