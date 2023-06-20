@@ -98,7 +98,7 @@ Now we calculate the Rademacher complexity of $\mathcal{H}_{\max}$:
 &= \mathfrak{R}_m(\mathcal{H}) + \mathfrak{R}_m(\mathcal{H}_0)
 \end{align}
 
-(1) is the definition of Rademacher complexity for $\mathcal{H}_{\max}$. We take advantage of the hint identity in (2) and then in (3) and (4) we apply the linearity of expectation and sub-additivity of the supremum. In (5) and (6) we apply the triangle inequality to the absolute difference between $h$ and $h_0$, and then in (7) we use the definition of Rademacher complexity to rewrite the first two terms, and the last two require Talagrand's contraction lemma with the fact that the Lipschitz constant of the absolute value function is 1. Simplifying gives the sum of Rademacher complexities of $\mathcal{H}$ and $\mathcal{H}_0$ as desired.
+(1) is the definition of Rademacher complexity for $\mathcal{H}_{\max}$. We take advantage of the hint identity in (2) and then in (3) and (4) we apply the linearity of expectation and sub-additivity of the supremum. In (6) we apply the triangle inequality to the absolute difference between $h$ and $h_0$, and use sub-additivity of the supremum and linearity of expectation again to split it into two expectations. Then in (7) we use the definition of Rademacher complexity to rewrite the first two terms, and the last two require Talagrand's contraction lemma with the fact that the Lipschitz constant of the absolute value function is 1. Simplifying gives the sum of Rademacher complexities of $\mathcal{H}$ and $\mathcal{H}_0$ as desired.
 
 \end{solution}
 
