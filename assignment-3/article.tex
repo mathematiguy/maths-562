@@ -1,0 +1,228 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Arsclassica Article
+% LaTeX Template
+% Version 1.1 (1/8/17)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Lorenzo Pantieri (http://www.lorenzopantieri.net) with extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+10pt, % Main document font size
+a4paper, % Paper type, use 'letterpaper' for US Letter paper
+oneside, % One page layout (no page indentation)
+%twoside, % Two page layout (page indentation for binding and different headers)
+headinclude,footinclude, % Extra spacing for the header and footer
+BCOR5mm, % Binding correction
+]{scrartcl}
+
+\usepackage{mdframed}
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
+\DeclareMathOperator*{\argmin}{argmin} % thin space, limits underneath in displays
+\DeclareMathOperator*{\sig}{sig}
+
+\input{structure.tex} % Include the structure.tex file which specified the document structure and layout
+
+\hyphenation{Fortran hy-phen-ation} % Specify custom hyphenation points in words with dashes where you would like hyphenation to occur, or alternatively, don't put any dashes in a word to stop hyphenation altogether
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND AUTHOR(S)
+%----------------------------------------------------------------------------------------
+
+\title{\normalfont\spacedallcaps{Language reclamation: Literature review}} % The article title
+
+%\subtitle{Subtitle} % Uncomment to display a subtitle
+
+\author{\spacedlowsmallcaps{Caleb Moses*}} % The article author(s) - author affiliations need to be specified in the AUTHOR AFFILIATIONS block
+
+\date{} % An optional date to appear under the author(s)
+
+
+\newenvironment{problem}[2][Problem]
+               { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+               {  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+               {\textit{Solution:}}
+               {}
+
+%----------------------------------------------------------------------------------------
+
+\title{MATH/COMP 562 ASSIGNMENT 3}
+\author{Caleb Moses}
+
+\begin{document}
+
+\maketitle
+
+%% \section*{Instructions}
+%% Submit your solutions on MyCourses course page. You can get help from other students, but you should do the write up yourself. Code solutions can be a PDF of a workbook, you can use any programming language, but NumPy is recommended.
+
+%% \section*{VC dimension}
+%% Refer to “Foundations of Machine Learning,” by Mohri, Chapter 3.
+
+\subsection*{Exercise 3.1 (Rademacher identities)}
+\begin{problem}{Mohri Exercise 3.8. part (c) only}
+Fix $m \geq 1$. Prove the following identity for any $\alpha \in \mathbb{R}$ and any two hypothesis sets $\mathcal{H}$ and $\mathcal{H}_0$ of functions mapping from $\mathcal{X}$ to $\mathbb{R}$:
+
+$\mathfrak{R}_m(\{\max(h, h_0 ): h \in \mathcal{H}, h_0 \in \mathcal{H}_0 \}) \leq \mathfrak{R}_m (\mathcal{H}) + \mathfrak{R}_m (\mathcal{H}_0)$, where $\max(h, h_0 )$ denotes the function $x \mapsto max_{x\in \mathcal{X}} (h(x), h_0 (x))$ (Hint: you could use the identity $\max(a, b) = \frac{1}{2} [a + b + |a - b|]$ valid for all $a, b \in \mathbb{R}$ and Talagrand’s contraction lemma (see lemma 5.7)).
+\end{problem}
+
+\begin{solution}
+Let $\mathcal{H}_{\max} = \{\max(h, h_0 ): h \in \mathcal{H}, h_0 \in \mathcal{H_0} \}$ be the class of functions that take the maximum of the predictions of a function $h$ from $\mathcal{H}$ and a function $h_0$ from $\mathcal{H}_0$.
+
+Now we calculate the Rademacher complexity of $\mathcal{H}_{\max}$:
+
+\begin{align}
+%% \mathfrak{R}_m(\mathcal{H}_{\max}) &= \mathbb{E}\left[\sup_{g\in\mathcal{H}{\max}}\frac{1}{m} \sum_{i=1}^m \sigma_i g(z_i)\right] \\
+\mathfrak{R}_m(\mathcal{H}_{\max}) &= \mathbb{E} \left[ \sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i \max(h(z_i), h_0(z_i)) \right] \\
+&= \mathbb{E} \left[ \sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \frac{\sigma_i}{2} (h(z_i) + h_0(z_i) + |h(z_i) - h_0(z_i)|) \right] \\
+%% &\leq \mathbb{E} \left[ \sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{2m} \sum_{i=1}^m \sigma_i (h(z_i) + h_0(z_i)) + \frac{1}{2m} \sum_{i=1}^m \sigma_i |h(z_i) - h_0(z_i)| \right] \\
+&\leq \frac{1}{2} \mathbb{E}\left[ \sup_{h\in\mathcal{H}}\frac{1}{m} \sum_{i=1}^m \sigma_i h(z_i)\right] + \mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0}\frac{1}{m} \sum_{i=1}^m \sigma_i h_0(z_i)\right] + \\
+&\qquad \frac{1}{2} \mathbb{E}\left[\sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i |h(z_i) - h_0(z_i)|\right] \\
+&\leq \frac{1}{2} \mathbb{E}\left[ \sup_{h\in\mathcal{H}}\frac{1}{m} \sum_{i=1}^m \sigma_i h(z_i)\right] + \frac{1}{2}\mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0}\frac{1}{m} \sum_{i=1}^m \sigma_i h_0(z_i)\right] + \\
+&\qquad \frac{1}{2} \mathbb{E}\left[\sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i |h(z_i)|\right] + \frac{1}{2} \mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i |h_0(z_i)|\right] \\
+&\leq \frac{\mathfrak{R}_m(\mathcal{H})}{2} + \frac{\mathfrak{R}_m(\mathcal{H}_0)}{2} + \frac{1 \cdot \mathfrak{R}_m(\mathcal{H})}{2} + \frac{1 \cdot \mathfrak{R}_m(\mathcal{H}_0)}{2} \\
+&= \mathfrak{R}_m(\mathcal{H}) + \mathfrak{R}_m(\mathcal{H}_0)
+\end{align}
+
+(1) is the definition of Rademacher complexity for $\mathcal{H}_{\max}$. We take advantage of the hint identity in (2) and then in (3) and (4) we apply the linearity of expectation and sub-additivity of the supremum. In (5) and (6) we apply the triangle inequality to the absolute difference between $h$ and $h_0$, and then in (7) we use the definition of Rademacher complexity to rewrite the first two terms, and the last two require Talagrand's contraction lemma with the fact that the Lipschitz constant of the absolute value function is 1. Simplifying gives the sum of Rademacher complexities of $\mathcal{H}$ and $\mathcal{H}_0$ as desired.
+
+\end{solution}
+
+\subsection*{Exercise 3.2 (VC dimension of finite hypothesis sets)}
+Mohri Exercise 3.14.
+
+\subsection*{Exercise 3.3 (VC dimension of closed balls).}
+Mohri Exercise 3.17.
+
+\subsection*{Exercise 3.4 (function class with infinite VC dimension).}
+Mohri Exercise 3.20.
+
+\section*{Stability Theory}
+Refer to posted class notes and Ch 13 of Understanding Machine Learning (Shalev-Shwartz).
+
+Exercise 3.5 (Strong Convexity). Recall that a function $f$ is $\lambda$-strongly convex if
+\[
+\alpha f(w) + (1 - \alpha)f(u) \geq f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2, \quad \forall u, w \in \mathbb{R}^d , \alpha \in [0, 1]
+\]
+
+\begin{enumerate}
+    \item Prove that $f(w) = \|w\|^2$ is $\lambda$-strongly convex with $\lambda = 2$.
+
+    \[\] % Space to write solution
+
+    \item Give an example of a convex function which is not $\lambda$-strongly convex for any $\lambda > 0$.
+
+    \[\] % Space to write solution
+
+    \item Let $f : \mathbb{R}^d \rightarrow \mathbb{R}$ be convex. Prove that $g(w, \lambda) = f(w) + \frac{\lambda}{2}\|w\|^2$ is $\lambda$-strongly convex.
+
+    \[\] % Space to write solution
+
+    \item Prove that $g$ is $\lambda$-strongly convex if and only if $f(w) = g(w) - \frac{\lambda}{2}\|w\|^2$ is convex.
+
+    \[\] % Space to write solution
+\end{enumerate}
+
+% Continuing from the previous LaTeX document
+
+\section*{Continuation of Exercises}
+
+\begin{enumerate}
+\setcounter{enumi}{5}
+    \item Exercise 3.6 (Random Variables and Strong Convexity). Let $X \in \mathbb{R}$ be a discrete vector-valued random variable, with distribution
+    \[
+    \rho(X) =
+    \begin{cases}
+      w, & \text{with probability }\alpha \\
+      u, & \text{with probability }(1 - \alpha)
+    \end{cases}
+    \]
+    \begin{enumerate}
+        \item Find $E[X]^2$, $E[X^2]$, $Var(X)$. Show that the expression $E[X^2] - (E[X])^2 = Var(X)$ corresponds to
+        \[
+        \alpha f(w) + (1 - \alpha) f(u) - f(\alpha w + (1 - \alpha) u) = \alpha (1 - \alpha) \|w - u\|^2
+        \]
+        with $f(w) = w^2$.
+
+        \[\] % Space to write solution
+
+        \item Suppose $f$ is $\lambda$ strongly convex. Let $X$ be as above. Show that
+        \[
+        E[f(X)] - f(E[X]) \geq \frac{\lambda}{2} Var(X)
+        \]
+
+        \[\] % Space to write solution
+    \end{enumerate}
+
+    \item Exercise 3.7 (Algorithmic Stability for Ridge Regression updated for clarity). Write,
+    \[
+    f(w, S) = L_S(w) = \frac{1}{m} \sum_{i=1}^{m} (w \cdot x_i - y_i)^2
+    \]
+    Consider the datasets $S_1$, $S_2$, which differ by exactly one data point. Write
+    \[
+    z_1 = (x_1, y_1) \in S_1, \quad z_2 = (x_2, y_2) \in S_2
+    \]
+    for the different points. Define $g(w, S) = f(w, S) + \frac{\lambda}{2} \|w\|^2$ and
+    \[
+    w_i = A(S_i) = \arg\min_w g(w, S_i), \quad i = 1, 2
+    \]
+    \begin{enumerate}
+        \item Explain why $g(w, S)$ is $\lambda$-strongly convex (as a function of $w$).
+
+        \[\] % Space to write solution
+
+        \item Explain how strong convexity is applied to obtain
+        \[
+        g(w_2, S_1) - g(w_1, S_1) \geq \frac{\lambda}{2} \|w_1 - w_2\|^2
+        \]
+        \[
+        g(w_1, S_2) - g(w_2, S_2) \geq \frac{\lambda}{2} \|w_1 - w_2\|^2
+        \]
+
+        \[\] % Space to write solution
+
+        \item Simplify to obtain
+        \[
+        \lambda \|w_1 - w_2\|^2 \leq \frac{1}{m} | \ell(w_2, z_1) - \ell(w_1, z_1) + \ell(w_1, z_2) - \ell(w_2, z_2) |
+        \]
+        for $\ell(w, z) = (w \cdot x - y)^2$.
+
+        \[\] % Space to write solution
+
+        \item Assume that $\|x\| \leq C_x$ and $|y| \leq C_y$ for all data $x$, $y$, and that $\|w_1\|, \|w_2\| \leq C_w$. Bound the RHS of the previous inequality. (Hint: apply the identity $(a^2 - b^2) = (a - b)(a + b)$ to the loss.)
+
+        \[\] % Space to write solution
+
+        \item Conclude that the Ridge Regression problem is replace one stable (ROS) and give the rate as a function of $\lambda$, $m$.
+
+        \[\] % Space to write solution
+    \end{enumerate}
+
+    \item Exercise 3.8 (Coding exercises). Using your choice of dataset (one dimensional is fine), perform Ridge regression. Find $w = A(S)$. Change one data point to obtain $S'$. Compute $w' = A(S')$. Changing the data by different amounts, check the stability bounds. Plot the $\|w - w'\|$ against the bound.
+
+    \[\] % Space to write solution
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\bibliography{sample.bib} % The file containing the bibliography
+
+\end{document}
