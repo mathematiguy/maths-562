@@ -7,11 +7,17 @@ SINGULARITY_ARGS ?=
 
 .PHONY: sandbox container shell root-shell docker docker-push docker-pull enter enter-root
 
-assignment-4/article.pdf: assignment-4/article.tex
+run: assignment-3/article.pdf
+
+assignment-3/article.pdf: assignment-3/article.tex
+	${RUN} bash -c "cd assignment-3 && latexmk article.tex -pdf"
+
+assignment-4/article.pdf: assignment-3/article.tex
 	${RUN} bash -c "cd assignment-4 && latexmk article.tex -pdf"
 
 clean:
-	cd assignment-4 && rm -f article.aux article.fls article.bbl article.log article.toc article.blg article.out article.pdf article.fdb_latexmk
+	(cd assignment-3 && rm -f article.aux article.fls article.bbl article.log article.toc article.blg article.out article.pdf article.fdb_latexmk)
+	(cd assignment-4 && rm -f article.aux article.fls article.bbl article.log article.toc article.blg article.out article.pdf article.fdb_latexmk)
 
 REMOTE ?= cn-f001
 push:
