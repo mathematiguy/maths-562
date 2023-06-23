@@ -201,6 +201,38 @@ $$f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2 
   \end{enumerate}
 \end{problem}
 
+\begin{solution}
+  \begin{enumerate}[label=(\alph*)]
+      \item We begin by calculating the left hand side of the strong Jensen's inequality:
+        \begin{align*}
+        &\hphantom{=} ||\alpha w + (1-\alpha)u)||^2 + \alpha(1-\alpha)||w-u||^2 \\
+        &= (\alpha w + (1-\alpha)u)^T(\alpha w + (1-\alpha)u) + \alpha(1-\alpha)(w-u)^T(w-u) \\
+        &= \alpha^2||w||^2 + 2\alpha(1-\alpha)(u\cdot w) + (1-\alpha)^2||u||^2 + \alpha(1-\alpha)(||w||^2 + 2(u\cdot w) + ||u||^2) \\
+        &= (\alpha^2+\alpha(1-\alpha))||w||^2 + 4\alpha(1-\alpha)(u\cdot w) + ((1-\alpha)^2 + \alpha(1-\alpha))||u||^2 \\
+        &\leq \alpha||w||^2 + 4\alpha(1-\alpha)||u||\cdot ||w|| + (1-\alpha)||u||^2 \\
+        &\leq \alpha||w||^2 + (1-\alpha)||u||^2
+        \end{align*}
+        as required.
+      \item I claim that $f(w)=|w|$ is convex, but not $\lambda$-strongly convex for any $\lambda$. By the triangle inequality, the following inequality is tight:
+        \begin{align*}
+          0 &\leq \alpha|w| + (1-\alpha)|u| -|\alpha w + (1-\alpha)u)|
+        \end{align*}
+        Strong convexity requires we can bound this term below by something quadratic in $||w-u||$ but this is not possible, so $|w|$ is not strongly convex.
+      \item We calculate Jensen's inequality for $g$: \begin{align*}
+        &\hphantom{=} g(\alpha w + (1-\alpha)u, \lambda) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
+        &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
+        &\leq f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha||w||^2 + (1-\alpha)||u||^2 - \alpha(1-\alpha)||w-u||^2) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
+        &\leq f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha||w||^2 + (1-\alpha)||u||^2) \\
+        &\leq \alpha (f(w) + \frac{\lambda}{2}||w||^2) + (1-\alpha)(f(u) + \frac{\lambda}{2}||u||^2)
+      \end{align*}
+        as required.
+      \item Suppose $f(w) = g(w) - \frac{\lambda}{2}||w||^2$ is convex. We will show that $g$ is $\lambda$-strongly convex:
+        \begin{align*}
+          &\hphantom{=} g(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
+          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2
+        \end{align*}
+  \end{enumerate}
+\end{solution}
 
 \begin{enumerate}
 \setcounter{enumi}{5}
@@ -272,8 +304,6 @@ $$f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2 
 
         \[\] % Space to write solution
     \end{enumerate}
-
-    \item Exercise 3.8 (Coding exercises). Using your choice of dataset (one dimensional is fine), perform Ridge regression. Find $w = A(S)$. Change one data point to obtain $S'$. Compute $w' = A(S')$. Changing the data by different amounts, check the stability bounds. Plot the $\|w - w'\|$ against the bound.
 
     \[\] % Space to write solution
 \end{enumerate}
