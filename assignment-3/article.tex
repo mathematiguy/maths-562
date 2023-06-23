@@ -67,12 +67,7 @@ BCOR5mm, % Binding correction
 
 \maketitle
 
-%% \section*{Instructions}
-%% Submit your solutions on MyCourses course page. You can get help from other students, but you should do the write up yourself. Code solutions can be a PDF of a workbook, you can use any programming language, but NumPy is recommended.
-
-%% \section*{VC dimension}
-%% Refer to “Foundations of Machine Learning,” by Mohri, Chapter 3.
-
+\section*{Rademacher Complexity}
 \subsection*{Exercise 3.1 (Rademacher identities)}
 \begin{problem}{Mohri Exercise 3.8. part (c) only}
 Fix $m \geq 1$. Prove the following identity for any $\alpha \in \mathbb{R}$ and any two hypothesis sets $\mathcal{H}$ and $\mathcal{H}_0$ of functions mapping from $\mathcal{X}$ to $\mathbb{R}$:
@@ -99,6 +94,8 @@ Now we calculate the Rademacher complexity of $\mathcal{H}_{\max}$:
 (1) is the definition of Rademacher complexity for $\mathcal{H}_{\max}$. We take advantage of the hint identity in (2) and then in (3) and (4) we apply the linearity of expectation and sub-additivity of the supremum. In (6) we apply the triangle inequality to the absolute difference between $h$ and $h_0$, and use sub-additivity of the supremum and linearity of expectation again to split it into two expectations. Then in (7) we use the definition of Rademacher complexity to rewrite the first two terms, and the last two require Talagrand's contraction lemma with the fact that the Lipschitz constant of the absolute value function is 1. Simplifying gives the sum of Rademacher complexities of $\mathcal{H}$ and $\mathcal{H}_0$ as desired.
 
 \end{solution}
+
+\section{VC dimension}
 
 \subsection*{Exercise 3.2 (VC dimension of finite hypothesis sets)}
 \begin{problem}{Mohri Exercise 3.14}
