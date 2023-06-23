@@ -190,33 +190,17 @@ Consider the hypothesis family of sine functions: $\mathcal{H} = \{x \to sin(\om
 \newpage
 
 \section*{Stability Theory}
-
-Exercise 3.5 (Strong Convexity). Recall that a function $f$ is $\lambda$-strongly convex if
-\[
-\alpha f(w) + (1 - \alpha)f(u) \geq f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2, \quad \forall u, w \in \mathbb{R}^d , \alpha \in [0, 1]
-\]
-
-\begin{enumerate}
+Recall that a function $f$ is $\lambda$-strongly convex if for all $u, w \in \mathbb{R}^d , \alpha \in [0, 1]$:
+$$f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2 \leq \alpha f(w) + (1 - \alpha)f(u)$$
+\begin{problem}{Exercise 3.5 (Strong convexity)}
+  \begin{enumerate}[label=(\alph*)]
     \item Prove that $f(w) = \|w\|^2$ is $\lambda$-strongly convex with $\lambda = 2$.
-
-    \[\] % Space to write solution
-
     \item Give an example of a convex function which is not $\lambda$-strongly convex for any $\lambda > 0$.
-
-    \[\] % Space to write solution
-
     \item Let $f : \mathbb{R}^d \rightarrow \mathbb{R}$ be convex. Prove that $g(w, \lambda) = f(w) + \frac{\lambda}{2}\|w\|^2$ is $\lambda$-strongly convex.
-
-    \[\] % Space to write solution
-
     \item Prove that $g$ is $\lambda$-strongly convex if and only if $f(w) = g(w) - \frac{\lambda}{2}\|w\|^2$ is convex.
+  \end{enumerate}
+\end{problem}
 
-    \[\] % Space to write solution
-\end{enumerate}
-
-% Continuing from the previous LaTeX document
-
-\section*{Continuation of Exercises}
 
 \begin{enumerate}
 \setcounter{enumi}{5}
