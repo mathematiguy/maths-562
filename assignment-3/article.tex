@@ -106,17 +106,41 @@ VC-dimension of finite hypothesis sets. Show that the VC-dimension of a finite h
 \end{problem}
 
 \begin{solution}
-Here is a solution
+  Let $\mathcal{H}$ be a finite hypothesis set that shatters an instance space $X$. Then each element of $\mathcal{H}$ corresponds to a possible labelling of $X$ and there are $2^{|X|}$ such labellings. Since $\mathcal{H}$ shatters $X$ we require $|\mathcal{H}| \geq 2^{|X|}$, since we need at least as many hypotheses as there are labellings for $X$. Equivalently, $\log_2{|\mathcal{H}|} \geq |X|$ so the largest set $X$ that $\mathcal{H}$ can shatter has size $\log_2 |\mathcal{H}|$ which gives the desired upper bound on the VC-dimension.
 \end{solution}
 
 \subsection*{Exercise 3.3 (VC dimension of closed balls).}
 \begin{problem}{Mohri Exercise 3.17}
-Show that the VC-dimension of the set of all closed balls in $\mathbb{R}_n$, i.e. sets of the form ${x \in \mathbb{R}_n : kx - x0 k2 \leq r}$ for some $x_0 \in \mathbb{R}_n$ and $r \geq 0$, is less than or equal to $n + 2$.
+Show that the VC-dimension of the set of all closed balls in $\mathbb{R}_n$, i.e. sets of the form ${x \in \mathbb{R}_n : ||x-x_0|| \leq r}$ for some $x_0 \in \mathbb{R}_n$ and $r \geq 0$, is less than or equal to $n + 2$.
 \end{problem}
 
 \begin{solution}
-Here is a solution
+Fix $r>0$, then the constraint $||x-a||^2<r$ is equivalent to:
+\begin{align*}
+  ||x-a||^2 - r &< 0 \\
+  (x-a)^T(x-a) - r &< 0 \\
+  ||x||^2 - 2(x\cdot a) + ||a||^2 - r &< 0 \\
+  \sum_{i=1}^n x_i^2 - 2 \sum_{i=1}^n a_i x_i + \sum_{i=1}^n a_i^2 - r &< 0
+\end{align*}
 \end{solution}
+
+We will show that there are enough free variables to capture $n+1$ arbitrary points. The last line is equivalent to $WX - B < 0$ with:
+
+\begin{align*}
+  W &= \begin{bmatrix}
+    1 \\
+    -2a_1 \\
+    ... \\
+    -2a_n
+   \end{bmatrix} & X = \begin{bmatrix}
+     \sum_{i=1}^n x_i^2 \\
+     x_1 \\
+     ... \\
+     x_n
+   \end{bmatrix} &&  B = \sum_{i=1}^n r - a_i^2
+\end{align*}
+
+There are n+1 linearly independent equations with n+1 unknowns (1 for each $a_i$ from 1 to n, plus $r$). So the VC dimension of closed balls in $\mathbb{R}^n$ is at most equal to the VC dimension of hyperplanes in $\mathbb{R}^{n+1}$, which is $n+2$.
 
 \subsection*{Exercise 3.4 (Function class with infinite VC dimension).}
 \begin{problem}{Mohri Exercise 3.20}
