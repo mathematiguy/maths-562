@@ -144,19 +144,55 @@ There are n+1 linearly independent equations with n+1 unknowns (1 for each $a_i$
 
 \subsection*{Exercise 3.4 (Function class with infinite VC dimension).}
 \begin{problem}{Mohri Exercise 3.20}
-Consider the hypothesis family of sine functions: $\{x \to sin(\omega x): \omega \in \mathbb{R}\}$.
+Consider the hypothesis family of sine functions: $\mathcal{H} = \{x \to sin(\omega x): \omega \in \mathbb{R}\}$.
 \begin{enumerate}[label=(\alph*)]
 \item Show that for any $x \in \mathbb{R}$ the points $x$, $2x$, $3x$ and $4x$ cannot be shattered by this family of sine functions.
-\item Show that the VC-dimension of the family of sine functions is infinite. (Hint: show that $\{2-i: i \leq m\}$ can be shattered for any $m > 0$.)
+\item Show that the VC-dimension of the family of sine functions is infinite. (Hint: show that $\{2^{-i}: i \leq m\}$ can be shattered for any $m > 0$.)
 \end{enumerate}
 \end{problem}
 
 \begin{solution}
-Here is a solution
+\begin{enumerate}[label=(\alph*)]
+  \item Fix $x\in\mathbb{R}$. Consider the dichotomy $\{(x, -), (2x, -), (3x, +), (4x, -)\}$. Assume towards contradiction that $\mathcal{H}$ realises this dichotomy, so there exists $\omega\in\mathbb{R}$ satisfying $\sin(\omega x) < 0$, $\sin(2 \omega x) < 0$, $\sin(3 \omega x) > 0$ and $\sin(4 \omega x) < 0$.
+
+  Using the double angle formulae for sin and cos gives:
+  \begin{align*}
+    \sin(4\omega x) &= 2 \sin(2\omega x)\cos(2\omega x) \\
+    &= 2\sin(2\omega x) (1 - 2\sin^2(\omega x))
+  \end{align*}
+
+  Since $\sin(4\omega x) < 0$ and $\sin(2\omega x) < 0$ by assumption, $1 - 2\sin^2(\omega x) > 0$ must hold otherwise the right hand side is positive while the left hand side is negative. Therefore $\sin^2(\omega x) < \frac{1}{2}$.
+
+  Next we use the triple angle formula for $\sin$ to calculate the following:
+  \begin{align*}
+    \sin(3\omega x) &= \sin(\omega x)(3 - 4\sin^2(\omega x))
+  \end{align*}
+
+  Since $\sin(3\omega x) > 0$ and $\sin(\omega x) < 0$, we require $3 - 4\sin^2(\omega x) < 0$ otherwise the left hand side is positive and the right hand side is negative. Therefore $\sin^2(\omega x) > \frac{3}{4}$. This contradicts $\sin^2(\omega x) < \frac{1}{2}$, so there is no $\omega$ such that $\mathcal{H}$ shatters $x$, $2x$, $3x$ and $4x$.
+
+\item Let $m \in \mathbb{N}$ and consider the points $\{2^{-i}: i \leq m\}$ with arbitrary labels $(y_1, ... y_{m}) \in \{-1, +1\}^m$. Let $y_i^\prime = \frac{1-y_i}{2}$ and choose $\omega = \pi(1 + \sum_{i=1}^m 2^{i}y_i^\prime)$. We will show that this is sufficient to correctly classify our chosen labels. then for any $j\in[1,m]$ we have the following:
+    \begin{align*}
+      \omega 2^{-j} &= 2^{-j} \pi\left[1 + \sum_{i=1}^m 2^{i}y_i^\prime\right] \\
+      &= \pi \left[2^{-j} + \sum_{i=1}^m 2^{i-j}y_i^\prime\right] \\
+      &= \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{i-j}y_i^\prime + \sum_{i=j+1}^m 2^{i-j}y_i^\prime \right] \\
+      &= \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime + \sum_{i=1}^{m-j} 2^iy_{i+j}^\prime \right] \\
+      &= \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime\right] + 2\pi \sum_{i=1}^{m-j} 2^{i-1}y_{i+j}^\prime
+    \end{align*}
+  The last term contributes multiples of $2\pi$ to $\omega 2^{-i}$ and so can be ignored. Since $y_i\in\{0,1\}$, the remaining term can be bound in the following way:
+
+  \begin{align*}
+    \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime\right] &\leq \pi \left[ y_j^\prime + \sum_{i=1}^{j} 2^{-i}\right] < \pi(1 + y_j^\prime) \\
+    \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime\right] &> \pi y_j^\prime
+  \end{align*}
+
+  Now if $y_j = 1$ then $y_j^\prime = 0$ and $0 < \omega 2^{-j} < \pi$ which implies $\sin(\omega 2^{-j}) > 0$. Similarly, if $y_j = -1$, then $y_j^\prime = 1$, $\pi < \omega 2^{-j} < 2\pi$ and we have that $\sin(\omega 2^{-j}) < 0$ as desired.
+
+\end{enumerate}
 \end{solution}
 
+\newpage
+
 \section*{Stability Theory}
-Refer to posted class notes and Ch 13 of Understanding Machine Learning (Shalev-Shwartz).
 
 Exercise 3.5 (Strong Convexity). Recall that a function $f$ is $\lambda$-strongly convex if
 \[
