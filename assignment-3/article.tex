@@ -231,8 +231,36 @@ $$f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2 
       \item Suppose $f(w) = g(w) - \frac{\lambda}{2}||w||^2$ is convex. We will show that $g$ is $\lambda$-strongly convex:
         \begin{align*}
           &\hphantom{=} g(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
-          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2
+          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
+          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha w + (1-\alpha) u)^T(\alpha w + (1-\alpha) u) + \\
+          &\hphantom{=} \frac{\lambda}{2}\alpha(1-\alpha)(w-u)^T(w-u) \\
+          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\left(\alpha^2||w||^2+2\alpha(1-\alpha)(u\cdot w) + (1-\alpha)^2||u||^2\right) + \\
+          &\hphantom{=} \frac{\lambda}{2}\alpha(1-\alpha)\left(||w||^2 - 2(u\cdot w) + ||u||^2\right) \\
+          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\left(\alpha^2||w||^2 + (1-\alpha)^2||u||^2\right) + \frac{\lambda}{2}\alpha(1-\alpha)\left(||w||^2 + ||u||^2\right) \\
+          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||w||^2\left(\alpha^2 + \alpha(1-\alpha)\right) + \frac{\lambda}{2}||u||^2\left((1-\alpha)^2 + \alpha(1-\alpha)\right) \\
+          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda\alpha}{2}||w||^2 + \frac{\lambda(1-\alpha)}{2}||u||^2 \\
+          &\leq \alpha f(w) + (1-\alpha)f(u) + \frac{\lambda\alpha}{2}||w||^2 + \frac{\lambda(1-\alpha)}{2}||u||^2 \\
+          &\leq \alpha (f(w) + \frac{\lambda}{2}||w||^2) + (1-\alpha)(f(u) + \frac{\lambda}{2}||u||^2) \\
+          &= \alpha g(w) + (1-\alpha)g(u)
         \end{align*}
+        as desired.
+
+        Now we must prove the converse. To that aim, assume $g$ is $\lambda$-strongly convex. We will now prove that $f$ is convex.
+        \begin{align*}
+          &\hphantom{=} f(\alpha w + (1-\alpha)u) \\
+          &= g(\alpha w + (1-\alpha)u) - \frac{\lambda}{2}||\alpha w + (1-\alpha)u||^2 \\
+          &\leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 - \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
+          &\leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}(\alpha w + (1-\alpha) u)^T(\alpha w + (1-\alpha) u) - \\
+          &\hphantom{\leq} \frac{\lambda}{2}\alpha(1-\alpha)(w-u)^T(w-u) \\
+          &\leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}\left(\alpha^2 ||w||^2 + 2\alpha(1-\alpha)(u \cdot w) + (1-\alpha) ||u||^2\right) - \\
+          &\hphantom{\leq} \frac{\lambda}{2}\alpha(1-\alpha)(||w||^2 - 2(u\cdot w) + ||u||^2) \\
+          &\leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}\left(\alpha^2 ||w||^2 + (1-\alpha) ||u||^2\right) - \frac{\lambda}{2}\alpha(1-\alpha)(||w||^2 + ||u||^2) \\
+          &\leq \alpha g(w) - \frac{\lambda}{2}||w||^2\left(\alpha^2 + \alpha(1-\alpha) \right)  + (1-\alpha)g(u) - \frac{\lambda}{2}||u||^2\left((1-\alpha)^2 + \alpha(1-\alpha)\right) \\
+          &\leq \alpha g(w) - \frac{\lambda\alpha}{2}||w||^2  + (1-\alpha)g(u) - \frac{\lambda(1-\alpha)}{2}||u||^2 \\
+          &\leq \alpha \left(g(w) - \frac{\lambda}{2}||w||^2\right) + (1-\alpha)\left(g(u) - \frac{\lambda}{2}||u||^2\right) \\
+          &= \alpha f(w) + (1-\alpha)f(u)
+        \end{align*}
+        so $f$ is convex.
   \end{enumerate}
 \end{solution}
 
