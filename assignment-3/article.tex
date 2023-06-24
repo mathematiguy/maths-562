@@ -312,9 +312,11 @@ $$f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2 
   \end{enumerate}
 \end{solution}
 
-    \item Exercise 3.7 (Algorithmic Stability for Ridge Regression updated for clarity). Write,
+\newpage
+\begin{problem}{Exercise 3.7 (Algorithmic Stability for Ridge Regression)}
+Write,
     \[
-    f(w, S) = L_S(w) = \frac{1}{m} \sum_{i=1}^{m} (w \cdot x_i - y_i)^2
+    f(w, S) = \hat{L}_S(w) = \frac{1}{m} \sum_{i=1}^{m} (w \cdot x_i - y_i)^2
     \]
     Consider the datasets $S_1$, $S_2$, which differ by exactly one data point. Write
     \[
@@ -326,8 +328,6 @@ $$f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2 
     \]
     \begin{enumerate}
         \item Explain why $g(w, S)$ is $\lambda$-strongly convex (as a function of $w$).
-
-        \[\] % Space to write solution
 
         \item Explain how strong convexity is applied to obtain
         \[
