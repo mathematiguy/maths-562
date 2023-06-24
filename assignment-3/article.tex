@@ -287,6 +287,30 @@ $$f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2 
   \end{enumerate}
 \end{problem}
 
+\begin{solution}
+  \begin{enumerate}
+    \item
+      \begin{enumerate}
+        \item $E[X] = \alpha w + (1-\alpha)u$ therefore $E[X]^2 = ||\alpha w + (1-\alpha)u||^2$
+        \item $E[X^2] = \alpha||w||^2 + (1-\alpha) ||u||^2$
+        \item $\begin{aligned}[t]
+          Var[X] &= E[X^2] - E[X]^2 \\
+          &= \alpha||w||^2 + (1-\alpha) ||u||^2 - ||\alpha w + (1-\alpha)u||^2 \\
+          &= \alpha||w||^2 + (1-\alpha) ||u||^2 - (\alpha w + (1-\alpha)u)^T(\alpha w + (1-\alpha)u) \\
+          &= \alpha||w||^2 + (1-\alpha) ||u||^2 - \left(\alpha^2||w||^2 -2\alpha(1-\alpha)(u\cdot w) + (1-\alpha)^2||u||^2\right) \\
+          &= ||w||^2(\alpha -\alpha^2)+2\alpha(1-\alpha)(u\cdot w) + ||u||^2(1-\alpha-(1-\alpha)^2) \\
+          &= ||w||^2\alpha(1 -\alpha)+2\alpha(1-\alpha)(u\cdot w) + ||u||^2\alpha(1 - \alpha) \\
+          &= \alpha(1-\alpha)\left(||w||^2 - 2(u\cdot w) + ||u||^2\right) \\
+          &= \alpha(1-\alpha)||w-u||^2
+          \end{aligned}$
+      \end{enumerate}
+    \item $\begin{aligned}[t]
+      E[f(X)] - f(E[X]) &= \alpha f(w) + (1-\alpha)f(u) - f(\alpha w + (1-\alpha)u) \\
+      &\geq \alpha f(w) + (1-\alpha)f(u) - \alpha f(w) -(1-\alpha)f(u) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
+      &\geq \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 = \frac{\lambda}{2}Var[x]
+      \end{aligned}$
+  \end{enumerate}
+\end{solution}
 
     \item Exercise 3.7 (Algorithmic Stability for Ridge Regression updated for clarity). Write,
     \[
