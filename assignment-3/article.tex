@@ -264,32 +264,29 @@ $$f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2 
   \end{enumerate}
 \end{solution}
 
-\begin{enumerate}
-\setcounter{enumi}{5}
-    \item Exercise 3.6 (Random Variables and Strong Convexity). Let $X \in \mathbb{R}$ be a discrete vector-valued random variable, with distribution
-    \[
-    \rho(X) =
-    \begin{cases}
-      w, & \text{with probability }\alpha \\
-      u, & \text{with probability }(1 - \alpha)
-    \end{cases}
-    \]
-    \begin{enumerate}
-        \item Find $E[X]^2$, $E[X^2]$, $Var(X)$. Show that the expression $E[X^2] - (E[X])^2 = Var(X)$ corresponds to
-        \[
-        \alpha f(w) + (1 - \alpha) f(u) - f(\alpha w + (1 - \alpha) u) = \alpha (1 - \alpha) \|w - u\|^2
-        \]
-        with $f(w) = w^2$.
+\begin{problem}{Exercise 3.6 (Random Variables and Strong Convexity)}
+  Let $X \in \mathbb{R}$ be a discrete vector-valued random variable, with distribution
+  \[
+  \rho(X) =
+  \begin{cases}
+    w, & \text{with probability }\alpha \\
+    u, & \text{with probability }(1 - \alpha)
+  \end{cases}
+  \]
+  \begin{enumerate}
+      \item Find $E[X]^2$, $E[X^2]$, $Var(X)$. Show that the expression $E[X^2] - (E[X])^2 = Var(X)$ corresponds to
+      \[
+      \alpha f(w) + (1 - \alpha) f(u) - f(\alpha w + (1 - \alpha) u) = \alpha (1 - \alpha) \|w - u\|^2
+      \]
+      with $f(w) = w^2$.
 
-        \[\] % Space to write solution
+      \item Suppose $f$ is $\lambda$-strongly convex. Let $X$ be as above. Show that
+      \[
+      E[f(X)] - f(E[X]) \geq \frac{\lambda}{2} Var(X)
+      \]
+  \end{enumerate}
+\end{problem}
 
-        \item Suppose $f$ is $\lambda$ strongly convex. Let $X$ be as above. Show that
-        \[
-        E[f(X)] - f(E[X]) \geq \frac{\lambda}{2} Var(X)
-        \]
-
-        \[\] % Space to write solution
-    \end{enumerate}
 
     \item Exercise 3.7 (Algorithmic Stability for Ridge Regression updated for clarity). Write,
     \[
