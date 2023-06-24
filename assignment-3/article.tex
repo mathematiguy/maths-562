@@ -27,7 +27,8 @@ oneside, % One page layout (no page indentation)
 headinclude,footinclude, % Extra spacing for the header and footer
 BCOR5mm, % Binding correction
 ]{scrartcl}
-
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
 \usepackage{mdframed}
 \usepackage{amsmath}
 \DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
