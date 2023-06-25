@@ -82,7 +82,7 @@ Write down and explain the loss for the discriminator, if the generator is fixed
 From \citet{prince2023understanding} 15.5 the discriminator loss function is given by:
 
 \begin{equation*}
-	L(\phi) = - \sum_j \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi)\right) - \sum_i log\left(\textrm{sig}(f(x_i, \phi))\right)
+	L(\phi) = - \sum_j \log\left(1 - \textrm{sig} (f(g(z_j, \theta), \phi))\right) - \sum_i \log\left(\textrm{sig}(f(x_i, \phi))\right)
 \end{equation*}
 
 where ``$\textrm{sig}$'' represents the sigmoid function.
@@ -92,10 +92,10 @@ For a fixed generator, we can imagine each $g(z_i, \theta) = \hat{x}_i$ where $\
 This gives us the loss function below:
 
 \begin{equation*}
-	L(\phi) = - \sum_j \log(1 - D(\hat{x}_j, \phi)) - \sum_i log(D(x_i, \phi))
+	L(\phi) = - \sum_j \log(1 - D(\hat{x}_j, \phi)) - \sum_i \log(D(x_i, \phi))
 \end{equation*}
 
-The result is a binary cross-entropy loss where the goal is to distinguish $x_i$ from $\hat{x}_i$. Real samples $x_i$ decrease the loss by $log(D(x_i, \phi))$ while generated samples increase the loss by $\log(1-D(\hat{x}_j, \phi))$.
+The result is a binary cross-entropy loss where the goal is to distinguish $x_i$ from $\hat{x}_i$. Real samples $x_i$ decrease the loss by $\log(D(x_i, \phi))$ while generated samples increase the loss by $\log(1-D(\hat{x}_j, \phi))$.
 
 \subsubsection*{Exercise 4.1 (b)}
 Write down and explain the loss (or gain, since it is a maximization) for the generator, if the discriminator is fixed.
@@ -105,7 +105,7 @@ Write down and explain the loss (or gain, since it is a maximization) for the ge
 From \citet{prince2023understanding} 15.5 the generator gain function is given by:
 
 \begin{equation*}
-	L(\theta) = - \sum_j \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi)\right)
+	L(\theta) = - \sum_j \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi))\right)
 \end{equation*}
 
 where, as before ``$\textrm{sig}$'' represents the sigmoid function.
@@ -135,7 +135,7 @@ This represents the Nash equilibrium in the minimax game between the generator a
 
 If the generator produces the full set of genuine images, the discriminator could learn to memorize the genuine images and achieve perfect discrimination. In this scenario the generator would not be optimal.
 
-If however the generator only produces a subset of the genuine images, then it is sub-optimal. This phenomenon is referred to as as "mode collapse", where the generator learns to generate only a limited variety of samples.
+If however the generator only produces a subset of the genuine images, then it is sub-optimal. This phenomenon is referred to as `mode collapse', where the generator learns to generate only a limited variety of samples.
 
 \newpage
 
@@ -144,7 +144,7 @@ Given the dataset $S_m = \{x_1 , \ldots , x_m \}$, the goal is to generate image
 
 The outputs are a set of models, $g_t : \mathcal{X} \rightarrow \mathcal{X}$, $g_t (x) = g(x, t)$ for $t \in T$.
 
-For each $t \in T$ , let $S_t = \{x_{t,i,j}\}, i = 1, \ldots , m$ for $j \in J$ be the dataset of t-noisy images, $x_{t,i,j} = \sqrt{\alpha_t} x_i + \sqrt{1 - \alpha_t} \epsilon_j$
+For each $t \in T$, let $S_t = \{x_{t,i,j}\}, i = 1, \ldots , m$ for $j \in J$ be the dataset of t-noisy images, $x_{t,i,j} = \sqrt{\alpha_t} x_i + \sqrt{1 - \alpha_t} \epsilon_j$
 
 The training loss for $g_t$ is given by
 \begin{equation*}
@@ -168,7 +168,7 @@ The training loss is the mean squared error between the output of $g_t(x_{t,i,j}
 	\hat{L}_{S_t}(g_t) = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g_t (x_{t,i,j} ) - \epsilon_j ||^2
 \end{equation*}
 
-Minimizing this loss amounts to minimizing $||g_t (x_{t,i,j})-\epsilon_j||^2$ for every $i = 1, ..., m$, and every $j \in J$.
+Minimizing this loss amounts to minimizing $||g_t (x_{t,i,j})-\epsilon_j||^2$ for every $i = 1, \ldots, m$, and every $j \in J$.
 
 Since $x_{t,i,j} = \sqrt{\alpha_t}x_i + \sqrt{1-\alpha_t}\epsilon_j$, rearranging for $\epsilon_j$ we can construct a new function $g^*$ which will depend only on $x_{t,i,j}$ and $t$:
 
@@ -195,7 +195,7 @@ In the case above, are there any other loss minimizers?
 
 \subsubsection*{Solution to Exercise 4.2 (b)}
 
-Suppose there are two different minimizers $g^t$ and $h^t$ of the loss. They both achieve the minimum loss, which is zero. So for all $i = 1, ..., m$ and for all $j \in J$,
+Suppose there are two different minimizers $g^t$ and $h^t$ of the loss. They both achieve the minimum loss, which is zero. So for all $i = 1, \ldots, m$ and for all $j \in J$,
 
 \begin{equation*}
 	||g^t(x_{t,i,j}) - \epsilon_j||^2 = ||h^t(x_{t,i,j}) - \epsilon_j||^2 = 0
@@ -222,7 +222,7 @@ All problems in this section are drawn from ``Understanding Deep Learning'' \cit
 
 \subsubsection*{Problem 16.1}
 
-Consider transforming a uniform base density defined on $z\in[0,1]$ using the function $x = f[z] = z^2$. Find an expression for the transformed distribution $Pr(x)$.
+Consider transforming a uniform base density defined on $z\in[0,1]$ using the function $x = f[z] = z^2$. Find an expression for the transformed distribution $\Pr(x)$.
 
 \subsubsection*{Problem 16.1 solution}
 
@@ -240,7 +240,7 @@ Now let $x = z^2$, then $z = \sqrt{x}$, and $\frac{dz}{dx} = \frac{1}{2\sqrt{x}}
 Consider transforming a standard normal distribution:
 
 \begin{equation*}
-	Pr(z) = \frac{1}{\sqrt{2\pi}} \exp \left[\frac{-z^2}{2}\right]
+	\Pr(z) = \frac{1}{\sqrt{2\pi}} \exp \left[\frac{-z^2}{2}\right]
 \end{equation*}
 
 with the function:
@@ -249,17 +249,17 @@ with the function:
 	x = f[z] = \frac{1}{1 + \exp[-z]}
 \end{equation*}
 
-Find an expression for the transformed distribution $Pr(x)$.
+Find an expression for the transformed distribution $\Pr(x)$.
 
 \subsubsection*{Problem 16.2 solution}
 
-As before, let $P_Z = Pr(z)$. Then $x = f[z]$ implies $z = \log(x(1-x))$, from which we derive: $\frac{dz}{dx} = \frac{1-2x}{x(1-x)}$
+As before, let $P_Z = \Pr(z)$. Then $x = f[z]$ implies $z = \log(x(1-x))$, from which we derive: $\frac{dz}{dx} = \frac{1-2x}{x(1-x)}$
 
 Then using the change of variables formula from before:
 
 \begin{align*}
-	p_X(x) & = p_Z(z) \left|\frac{dz}{dx}\right|                                                                 \\
-	       & = \frac{1}{\sqrt{2\pi}} \exp \left[-\frac{1}{2}(\log(x(1-x)))^2 \right] \cdot \frac{|1-2x|}{x(1-x)}
+	p_X(x) & = p_Z(z) \left|\frac{dz}{dx}\right|                                                                   \\
+	       & = \frac{1}{\sqrt{2\pi}} \exp \left[-\frac{1}{2}{(\log(x(1-x)))}^2 \right] \cdot \frac{|1-2x|}{x(1-x)}
 \end{align*}
 
 The expression looks a bit nasty but I don't think it's possible to simplify further.
@@ -276,7 +276,7 @@ Write out the expression for the KL divergence in the equation:
 	\phi = \argmin \left[ KL \left[ \sum_{i=1}^I \delta[x-f[z_i,\phi]] || q(x) \right] \right]
 \end{equation*}
 
-Why does it not matter if we can only evaluate the probability q(x) up to a scaling factor $\kappa$? Does the network have to be invertible to minimize this loss function? Explain your reasoning.
+Why does it not matter if we can only evaluate the probability $q(x)$ up to a scaling factor $\kappa$? Does the network have to be invertible to minimize this loss function? Explain your reasoning.
 
 \subsubsection*{Problem 16.11 solution}
 
@@ -328,7 +328,7 @@ We proceed by calculating $Var[x_t]$ using the standard laws of variance. In add
 
 Consider the variable:
 
-$$z = a \cdot \epsilon_1 + b \cdot \epsilon_2$$
+\[z = a \cdot \epsilon_1 + b \cdot \epsilon_2\]
 
 where both $\epsilon_1$ and $\epsilon_2$ are drawn from independent standard normal distributions with mean zero and unit variance. Show that:
 
