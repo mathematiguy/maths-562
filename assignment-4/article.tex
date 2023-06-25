@@ -20,12 +20,12 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[
-10pt, % Main document font size
-a4paper, % Paper type, use 'letterpaper' for US Letter paper
-oneside, % One page layout (no page indentation)
-%twoside, % Two page layout (page indentation for binding and different headers)
-headinclude,footinclude, % Extra spacing for the header and footer
-BCOR5mm, % Binding correction
+	10pt, % Main document font size
+	a4paper, % Paper type, use 'letterpaper' for US Letter paper
+	oneside, % One page layout (no page indentation)
+	%twoside, % Two page layout (page indentation for binding and different headers)
+	headinclude,footinclude, % Extra spacing for the header and footer
+	BCOR5mm, % Binding correction
 ]{scrartcl}
 
 \usepackage{amsmath}
@@ -65,13 +65,13 @@ Refer to \url{https://udlbook.github.io/udlbook/}
 
 Given a dataset of genuine images, $S_m = \{x_1, \ldots, x_m\}$. The goal is to train a generator, $x_i = g(z_i, \theta)$, to generate images $x_i \in S_m$ from noise $z_i$. This is achieved by also training a discriminator, $f(x, \phi)$, which classifies an image as genuine or generated, using the minimax training loss
 \begin{equation*}
-\max_\theta \min_\phi \mathcal{L}^S_\theta(f(x, \phi), y)
+	\max_\theta \min_\phi \mathcal{L}^S_\theta(f(x, \phi), y)
 \end{equation*}
 applied to the combined dataset, $S_\theta = S_N \cup S_G^\theta$,
 where
 \begin{itemize}
-    \item $S_N = \{(x_1, 1), \ldots, (x_m, 1)\}$, the (fixed) genuine images, with label $y = 1$,
-    \item $S_G^\theta = \{(x^\theta_1, 0), \ldots, (x^\theta_m, 0)\}$, a changing set of generated images $x^\theta_i = g(z_i, \theta)$, with label $y = 0$.
+	\item $S_N = \{(x_1, 1), \ldots, (x_m, 1)\}$, the (fixed) genuine images, with label $y = 1$,
+	\item $S_G^\theta = \{(x^\theta_1, 0), \ldots, (x^\theta_m, 0)\}$, a changing set of generated images $x^\theta_i = g(z_i, \theta)$, with label $y = 0$.
 \end{itemize}
 
 \subsubsection*{Exercise 4.1 (a)}
@@ -82,7 +82,7 @@ Write down and explain the loss for the discriminator, if the generator is fixed
 From \citet{prince2023understanding} 15.5 the discriminator loss function is given by:
 
 \begin{equation*}
-  L(\phi) = - \sum_j \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi)\right) - \sum_i log\left(\textrm{sig}(f(x_i, \phi))\right)
+	L(\phi) = - \sum_j \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi)\right) - \sum_i log\left(\textrm{sig}(f(x_i, \phi))\right)
 \end{equation*}
 
 where ``$\textrm{sig}$'' represents the sigmoid function.
@@ -92,7 +92,7 @@ For a fixed generator, we can imagine each $g(z_i, \theta) = \hat{x}_i$ where $\
 This gives us the loss function below:
 
 \begin{equation*}
-  L(\phi) = - \sum_j \log(1 - D(\hat{x}_j, \phi)) - \sum_i log(D(x_i, \phi))
+	L(\phi) = - \sum_j \log(1 - D(\hat{x}_j, \phi)) - \sum_i log(D(x_i, \phi))
 \end{equation*}
 
 The result is a binary cross-entropy loss where the goal is to distinguish $x_i$ from $\hat{x}_i$. Real samples $x_i$ decrease the loss by $log(D(x_i, \phi))$ while generated samples increase the loss by $\log(1-D(\hat{x}_j, \phi))$.
@@ -105,7 +105,7 @@ Write down and explain the loss (or gain, since it is a maximization) for the ge
 From \citet{prince2023understanding} 15.5 the generator gain function is given by:
 
 \begin{equation*}
-  L(\theta) = - \sum_j \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi)\right)
+	L(\theta) = - \sum_j \log\left(1 - \textrm{sig}(f(g(z_j, \theta), \phi)\right)
 \end{equation*}
 
 where, as before ``$\textrm{sig}$'' represents the sigmoid function.
@@ -113,7 +113,7 @@ where, as before ``$\textrm{sig}$'' represents the sigmoid function.
 For a fixed discriminator, we can let $D_\phi(x) = \textrm{sig}(f(x, \phi))$ (we are bringing the $\phi$ into the function, since now it can't vary). In this scenario the GAN problem requires us to find the optimal $\hat{\theta}$ satisfying below:
 
 \begin{equation*}
-  L(\theta) = - \sum_j \log(1 - D_{\phi}(g(z_j, \theta)))
+	L(\theta) = - \sum_j \log(1 - D_{\phi}(g(z_j, \theta)))
 \end{equation*}
 
 The purpose of the generator gain function is to reward the generator for samples that are assigned high probability by the discriminator.
@@ -128,7 +128,7 @@ A saddle point, $(\theta, \phi)$, is a point where (i) if we fix $\phi$ and chan
 The saddle points of the GAN loss function are solutions to the following minimax problem, as described in \citet{prince2023understanding} equation 15.4:
 
 \begin{equation*}
-\hat{\theta} = \argmax_\theta \left[ \min_\phi \left[ \sum_j - \log(1 - \sig(f(g(z_j, \theta), \phi))) - \sum_i \log(\sig(f(x_i, \phi))) \right] \right]
+	\hat{\theta} = \argmax_\theta \left[ \min_\phi \left[ \sum_j - \log(1 - \sig(f(g(z_j, \theta), \phi))) - \sum_i \log(\sig(f(x_i, \phi))) \right] \right]
 \end{equation*}
 
 This represents the Nash equilibrium in the minimax game between the generator and the discriminator.
@@ -148,12 +148,12 @@ For each $t \in T$ , let $S_t = \{x_{t,i,j}\}, i = 1, \ldots , m$ for $j \in J$ 
 
 The training loss for $g_t$ is given by
 \begin{equation*}
-\hat{L}_{S_t}(g_t) = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g_t (x_{t,i,j} ) - \epsilon_j ||^2
+	\hat{L}_{S_t}(g_t) = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g_t (x_{t,i,j} ) - \epsilon_j ||^2
 \end{equation*}
 
 Define the closest point map
 \begin{equation*}
-  g^{CP}(x) = g^{CP}(x, S^m) = \argmin_{x_i \in S^m} ||x - x_i||^2
+	g^{CP}(x) = g^{CP}(x, S^m) = \argmin_{x_i \in S^m} ||x - x_i||^2
 \end{equation*}
 
 \subsubsection*{Exercise 4.2 (a)}
@@ -165,7 +165,7 @@ In this argument we will show that under the given assumption, the noise vector 
 The training loss is the mean squared error between the output of $g_t(x_{t,i,j})$ and the noise vectors $\epsilon_j$:
 
 \begin{equation*}
-  \hat{L}_{S_t}(g_t) = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g_t (x_{t,i,j} ) - \epsilon_j ||^2
+	\hat{L}_{S_t}(g_t) = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g_t (x_{t,i,j} ) - \epsilon_j ||^2
 \end{equation*}
 
 Minimizing this loss amounts to minimizing $||g_t (x_{t,i,j})-\epsilon_j||^2$ for every $i = 1, ..., m$, and every $j \in J$.
@@ -173,9 +173,9 @@ Minimizing this loss amounts to minimizing $||g_t (x_{t,i,j})-\epsilon_j||^2$ fo
 Since $x_{t,i,j} = \sqrt{\alpha_t}x_i + \sqrt{1-\alpha_t}\epsilon_j$, rearranging for $\epsilon_j$ we can construct a new function $g^*$ which will depend only on $x_{t,i,j}$ and $t$:
 
 \begin{align*}
-  \epsilon_j &= \frac{x_{t,i,j} - \sqrt{\alpha_t}x_i}{\sqrt{1-\alpha_t}} \\
-   &= \frac{x_{t,i,j} - \sqrt{\alpha_t} \cdot \argmin_{x_k \in S^m} ||x_{t,i,j}-x_k||^2}{\sqrt{1-\alpha_t}} \\
-  &= g^*_t(x_{t,i,j})
+	\epsilon_j & = \frac{x_{t,i,j} - \sqrt{\alpha_t}x_i}{\sqrt{1-\alpha_t}}                                              \\
+	           & = \frac{x_{t,i,j} - \sqrt{\alpha_t} \cdot \argmin_{x_k \in S^m} ||x_{t,i,j}-x_k||^2}{\sqrt{1-\alpha_t}} \\
+	           & = g^*_t(x_{t,i,j})
 \end{align*}
 
 Where we take advantage of the fact that $g^{CP}(x_{t,i,j}) = x_i$ to remove the dependency on $x_i$. By construction $g$ depends only on $x_{t,i,j}$ and $t$. This means $g^*_t(x)$ is a viable candidate minimizer for the loss $\hat{L}_{S_t}$.
@@ -183,9 +183,9 @@ Where we take advantage of the fact that $g^{CP}(x_{t,i,j}) = x_i$ to remove the
 Lastly we show that $g^*_t$ minimizes $\hat{L}_{S_t}$:
 
 \begin{align*}
-  \hat{L}_{S_t}(g^*_t) &= \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g^*_t (x_{t,i,j} ) - \epsilon_j ||^2 \\
-  &= \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||\epsilon_j - \epsilon_j ||^2 \\
-  &= \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} 0 = 0
+	\hat{L}_{S_t}(g^*_t) & = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||g^*_t (x_{t,i,j} ) - \epsilon_j ||^2 \\
+	                     & = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} ||\epsilon_j - \epsilon_j ||^2         \\
+	                     & = \frac{1}{m} \sum_{i=1}^{m} \sum_{j \in J} 0 = 0
 \end{align*}
 
 Since the loss is non-negative, we can conclude that $g^*_t$ minimizes the loss.
@@ -198,7 +198,7 @@ In the case above, are there any other loss minimizers?
 Suppose there are two different minimizers $g^t$ and $h^t$ of the loss. They both achieve the minimum loss, which is zero. So for all $i = 1, ..., m$ and for all $j \in J$,
 
 \begin{equation*}
-  ||g^t(x_{t,i,j}) - \epsilon_j||^2 = ||h^t(x_{t,i,j}) - \epsilon_j||^2 = 0
+	||g^t(x_{t,i,j}) - \epsilon_j||^2 = ||h^t(x_{t,i,j}) - \epsilon_j||^2 = 0
 \end{equation*}
 
 This implies that $g^t(x_{t,i,j}) = h^t(x_{t,i,j}) = \epsilon_j$ for all $i$ and $j$. Therefore, if $g^t$ and $h^t$ are both loss minimizers for $\hat{L}_{S^t}$, they must be equal. Therefore $g^*_t$ is unique.
@@ -231,8 +231,8 @@ Let $P_Z$ be the probability density of $z$, then $P_Z = 1$, since $z\sim U[0,1]
 Now let $x = z^2$, then $z = \sqrt{x}$, and $\frac{dz}{dx} = \frac{1}{2\sqrt{x}}$. Let $P_X$ be the probability density of $x$. Lastly we use the change of variables formula for probability densities:
 
 \begin{align*}
-  p_X(x) &= p_Z(z) \left|\frac{dz}{dx}\right| \\
-  &= 1 \cdot \left| \frac{1}{2 \sqrt{x}} \right| = \frac{1}{2\sqrt{x}}
+	p_X(x) & = p_Z(z) \left|\frac{dz}{dx}\right|                                 \\
+	       & = 1 \cdot \left| \frac{1}{2 \sqrt{x}} \right| = \frac{1}{2\sqrt{x}}
 \end{align*}
 
 \subsubsection*{Problem 16.2}
@@ -240,13 +240,13 @@ Now let $x = z^2$, then $z = \sqrt{x}$, and $\frac{dz}{dx} = \frac{1}{2\sqrt{x}}
 Consider transforming a standard normal distribution:
 
 \begin{equation*}
-  Pr(z) = \frac{1}{\sqrt{2\pi}} \exp \left[\frac{-z^2}{2}\right]
+	Pr(z) = \frac{1}{\sqrt{2\pi}} \exp \left[\frac{-z^2}{2}\right]
 \end{equation*}
 
 with the function:
 
 \begin{equation*}
-  x = f[z] = \frac{1}{1 + \exp[-z]}
+	x = f[z] = \frac{1}{1 + \exp[-z]}
 \end{equation*}
 
 Find an expression for the transformed distribution $Pr(x)$.
@@ -258,8 +258,8 @@ As before, let $P_Z = Pr(z)$. Then $x = f[z]$ implies $z = \log(x(1-x))$, from w
 Then using the change of variables formula from before:
 
 \begin{align*}
-  p_X(x) &= p_Z(z) \left|\frac{dz}{dx}\right| \\
-  &= \frac{1}{\sqrt{2\pi}} \exp \left[-\frac{1}{2}(\log(x(1-x)))^2 \right] \cdot \frac{|1-2x|}{x(1-x)}
+	p_X(x) & = p_Z(z) \left|\frac{dz}{dx}\right|                                                                 \\
+	       & = \frac{1}{\sqrt{2\pi}} \exp \left[-\frac{1}{2}(\log(x(1-x)))^2 \right] \cdot \frac{|1-2x|}{x(1-x)}
 \end{align*}
 
 The expression looks a bit nasty but I don't think it's possible to simplify further.
@@ -273,7 +273,7 @@ The expression looks a bit nasty but I don't think it's possible to simplify fur
 Write out the expression for the KL divergence in the equation:
 
 \begin{equation*}
-  \phi = \argmin \left[ KL \left[ \sum_{i=1}^I \delta[x-f[z_i,\phi]] || q(x) \right] \right]
+	\phi = \argmin \left[ KL \left[ \sum_{i=1}^I \delta[x-f[z_i,\phi]] || q(x) \right] \right]
 \end{equation*}
 
 Why does it not matter if we can only evaluate the probability q(x) up to a scaling factor $\kappa$? Does the network have to be invertible to minimize this loss function? Explain your reasoning.
@@ -283,15 +283,15 @@ Why does it not matter if we can only evaluate the probability q(x) up to a scal
 Writing out the KL divergence in full gives:
 
 \begin{equation*}
-  \phi = \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{q(x)} dx \right]
+	\phi = \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{q(x)} dx \right]
 \end{equation*}
 
 If we replace $q(x)$ with $\kappa q(x)$ in the above equation it can be factored out as an additive constant in the following way:
 
 \begin{align*}
-  \phi &= \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{\kappa q(x)} dx \right] \\
-  &= \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{q(x)} dx - \log \kappa \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] dx \right] \\
-  &= \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{q(x)} dx - \log \kappa \right]
+	\phi & = \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{\kappa q(x)} dx \right]                                                   \\
+	     & = \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{q(x)} dx - \log \kappa \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] dx \right] \\
+	     & = \argmin \left[ \int \sum_{i=1}^I \delta[x-f[z_i,\phi]] \log \frac{\sum_{i=1}^I \delta[x-f[z_i,\phi]]}{q(x)} dx - \log \kappa \right]
 \end{align*}
 
 Where the last line holds since the probability density $\sum_{i-1}^I \delta[x-f[z_i,\phi]]$ integrates to 1 over its domain. Since the result of multiplying $q(x)$ by a constant $\kappa$ only adds a constant term to the KL-divergence, the $\phi$ which minimizes this divergence is the same.
@@ -307,7 +307,7 @@ The network does not need to be invertible to minimize the KL divergence. Since 
 Show that if $Var[x_{t-1}] = \textbf{I}$ and we use the update:
 
 \begin{equation*}
-  x_t = \sqrt{1-\beta_t}\cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t,
+	x_t = \sqrt{1-\beta_t}\cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t,
 \end{equation*}
 
 then $Var[x_t] = \textbf{I}$ so the variance stays the same.
@@ -317,11 +317,11 @@ then $Var[x_t] = \textbf{I}$ so the variance stays the same.
 We proceed by calculating $Var[x_t]$ using the standard laws of variance. In addition, we use the fact that $x_{t-1}$ and $\epsilon_t$ are independent, and that $Var[\epsilon_t] = \textbf{I}$ since $\epsilon_t$ is drawn from a standard multivariate normal distribution.
 
 \begin{align*}
-  Var[x_t] &= Var[\sqrt{1-\beta_t}\cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t] \\
-  &= Var[\sqrt{1-\beta_t}\cdot x_{t-1}] + Var[\sqrt{\beta_t} \cdot \epsilon_t] \\
-  &= (1-\beta_t) Var[x_{t-1}] + \beta_t Var[ \cdot \epsilon_t] \\
-  &= (1-\beta_t) \textbf{I} + \beta_t \textbf{I} \\
-  &= \textbf{I}
+	Var[x_t] & = Var[\sqrt{1-\beta_t}\cdot x_{t-1} + \sqrt{\beta_t} \cdot \epsilon_t]      \\
+	         & = Var[\sqrt{1-\beta_t}\cdot x_{t-1}] + Var[\sqrt{\beta_t} \cdot \epsilon_t] \\
+	         & = (1-\beta_t) Var[x_{t-1}] + \beta_t Var[ \cdot \epsilon_t]                 \\
+	         & = (1-\beta_t) \textbf{I} + \beta_t \textbf{I}                               \\
+	         & = \textbf{I}
 \end{align*}
 
 \subsubsection*{Problem 18.2}
@@ -333,8 +333,8 @@ $$z = a \cdot \epsilon_1 + b \cdot \epsilon_2$$
 where both $\epsilon_1$ and $\epsilon_2$ are drawn from independent standard normal distributions with mean zero and unit variance. Show that:
 
 \begin{align*}
-  \mathbb{E}[z] &= 0 \\
-  Var[z] &= a^2 + b^2
+	\mathbb{E}[z] & = 0         \\
+	Var[z]        & = a^2 + b^2
 \end{align*}
 
 so we could equivalently compute $z = \sqrt{a^2 + b^2} \cdot \epsilon$ where $\epsilon$ is also drawn from a standard normal distribution.
@@ -346,10 +346,10 @@ $\mathbb{E}[z] = 0$ holds by linearity of expectation since $\mathbb{E}[\epsilon
 We calculate $Var[z]$ by hand, using the facts that $\epsilon_1$ and $\epsilon_2$ are independent, so $Cov[\epsilon_1, \epsilon_2] = 0$, and $Var[\epsilon_1] = Var[\epsilon_2] = 1$.
 
 \begin{align*}
-  Var[z] &= Var[a \epsilon_1 + b \epsilon_2] \\
-  &= a^2 Var[\epsilon_1] + b^2 Var[\epsilon_2] + 2ab Cov[\epsilon_1, \epsilon_2] \\
-  &= a^2 Var[\epsilon_1] + b^2 Var[\epsilon_2] \\
-  &= a^2 + b^2
+	Var[z] & = Var[a \epsilon_1 + b \epsilon_2]                                            \\
+	       & = a^2 Var[\epsilon_1] + b^2 Var[\epsilon_2] + 2ab Cov[\epsilon_1, \epsilon_2] \\
+	       & = a^2 Var[\epsilon_1] + b^2 Var[\epsilon_2]                                   \\
+	       & = a^2 + b^2
 \end{align*}
 
 %----------------------------------------------------------------------------------------
