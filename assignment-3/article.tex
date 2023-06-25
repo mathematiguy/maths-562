@@ -20,12 +20,12 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[
-10pt, % Main document font size
-a4paper, % Paper type, use 'letterpaper' for US Letter paper
-oneside, % One page layout (no page indentation)
-%twoside, % Two page layout (page indentation for binding and different headers)
-headinclude,footinclude, % Extra spacing for the header and footer
-BCOR5mm, % Binding correction
+	10pt, % Main document font size
+	a4paper, % Paper type, use 'letterpaper' for US Letter paper
+	oneside, % One page layout (no page indentation)
+	%twoside, % Two page layout (page indentation for binding and different headers)
+	headinclude,footinclude, % Extra spacing for the header and footer
+	BCOR5mm, % Binding correction
 ]{scrartcl}
 \renewcommand{\labelenumii}{\theenumii}
 \renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
@@ -51,13 +51,13 @@ BCOR5mm, % Binding correction
 
 
 \newenvironment{problem}[2][]
-               { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
-               {  \end{mdframed}}
+{ \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+		{  \end{mdframed}}
 
 % Define solution environment
 \newenvironment{solution}
-               {\textit{Solution:}}
-               {}
+{\textit{Solution:}}
+{}
 
 %----------------------------------------------------------------------------------------
 
@@ -77,22 +77,22 @@ $\mathfrak{R}_m(\{\max(h, h_0 ): h \in \mathcal{H}, h_0 \in \mathcal{H}_0 \}) \l
 \end{problem}
 
 \begin{solution}
-Let $\mathcal{H}_{\max} = \{\max(h, h_0 ): h \in \mathcal{H}, h_0 \in \mathcal{H_0} \}$ be the class of functions that take the maximum of the predictions of a function $h$ from $\mathcal{H}$ and a function $h_0$ from $\mathcal{H}_0$.
+	Let $\mathcal{H}_{\max} = \{\max(h, h_0 ): h \in \mathcal{H}, h_0 \in \mathcal{H_0} \}$ be the class of functions that take the maximum of the predictions of a function $h$ from $\mathcal{H}$ and a function $h_0$ from $\mathcal{H}_0$.
 
-Now we calculate the Rademacher complexity of $\mathcal{H}_{\max}$:
+	Now we calculate the Rademacher complexity of $\mathcal{H}_{\max}$:
 
-\begin{align}
-\mathfrak{R}_m(\mathcal{H}_{\max}) &= \mathbb{E} \left[ \sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i \max(h(z_i), h_0(z_i)) \right] \\
-&= \mathbb{E} \left[ \sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \frac{\sigma_i}{2} (h(z_i) + h_0(z_i) + |h(z_i) - h_0(z_i)|) \right] \\
-&\leq \frac{1}{2} \mathbb{E}\left[ \sup_{h\in\mathcal{H}}\frac{1}{m} \sum_{i=1}^m \sigma_i h(z_i)\right] + \mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0}\frac{1}{m} \sum_{i=1}^m \sigma_i h_0(z_i)\right] + \\
-&\qquad \frac{1}{2} \mathbb{E}\left[\sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i |h(z_i) - h_0(z_i)|\right] \\
-&\leq \frac{1}{2} \mathbb{E}\left[ \sup_{h\in\mathcal{H}}\frac{1}{m} \sum_{i=1}^m \sigma_i h(z_i)\right] + \frac{1}{2}\mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0}\frac{1}{m} \sum_{i=1}^m \sigma_i h_0(z_i)\right] + \\
-&\qquad \frac{1}{2} \mathbb{E}\left[\sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i |h(z_i)|\right] + \frac{1}{2} \mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i |h_0(z_i)|\right] \\
-&\leq \frac{\mathfrak{R}_m(\mathcal{H})}{2} + \frac{\mathfrak{R}_m(\mathcal{H}_0)}{2} + \frac{1 \cdot \mathfrak{R}_m(\mathcal{H})}{2} + \frac{1 \cdot \mathfrak{R}_m(\mathcal{H}_0)}{2} \\
-&= \mathfrak{R}_m(\mathcal{H}) + \mathfrak{R}_m(\mathcal{H}_0)
-\end{align}
+	\begin{align}
+		\mathfrak{R}_m(\mathcal{H}_{\max}) & = \mathbb{E} \left[ \sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i \max(h(z_i), h_0(z_i)) \right]                                                                                         \\
+		                                   & = \mathbb{E} \left[ \sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \frac{\sigma_i}{2} (h(z_i) + h_0(z_i) + |h(z_i) - h_0(z_i)|) \right]                                                            \\
+		                                   & \leq \frac{1}{2} \mathbb{E}\left[ \sup_{h\in\mathcal{H}}\frac{1}{m} \sum_{i=1}^m \sigma_i h(z_i)\right] + \mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0}\frac{1}{m} \sum_{i=1}^m \sigma_i h_0(z_i)\right] +                  \\
+		                                   & \qquad \frac{1}{2} \mathbb{E}\left[\sup_{h\in\mathcal{H}, h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i |h(z_i) - h_0(z_i)|\right]                                                                              \\
+		                                   & \leq \frac{1}{2} \mathbb{E}\left[ \sup_{h\in\mathcal{H}}\frac{1}{m} \sum_{i=1}^m \sigma_i h(z_i)\right] + \frac{1}{2}\mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0}\frac{1}{m} \sum_{i=1}^m \sigma_i h_0(z_i)\right] +       \\
+		                                   & \qquad \frac{1}{2} \mathbb{E}\left[\sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i |h(z_i)|\right] + \frac{1}{2} \mathbb{E}\left[\sup_{h_0\in\mathcal{H}_0} \frac{1}{m} \sum_{i=1}^m \sigma_i |h_0(z_i)|\right] \\
+		                                   & \leq \frac{\mathfrak{R}_m(\mathcal{H})}{2} + \frac{\mathfrak{R}_m(\mathcal{H}_0)}{2} + \frac{1 \cdot \mathfrak{R}_m(\mathcal{H})}{2} + \frac{1 \cdot \mathfrak{R}_m(\mathcal{H}_0)}{2}                                   \\
+		                                   & = \mathfrak{R}_m(\mathcal{H}) + \mathfrak{R}_m(\mathcal{H}_0)
+	\end{align}
 
-(1) is the definition of Rademacher complexity for $\mathcal{H}_{\max}$. We take advantage of the hint identity in (2) and then in (3) and (4) we apply the linearity of expectation and sub-additivity of the supremum. In (6) we apply the triangle inequality to the absolute difference between $h$ and $h_0$, and use sub-additivity of the supremum and linearity of expectation again to split it into two expectations. Then in (7) we use the definition of Rademacher complexity to rewrite the first two terms, and the last two require Talagrand's contraction lemma with the fact that the Lipschitz constant of the absolute value function is 1. Simplifying gives the sum of Rademacher complexities of $\mathcal{H}$ and $\mathcal{H}_0$ as desired.
+	(1) is the definition of Rademacher complexity for $\mathcal{H}_{\max}$. We take advantage of the hint identity in (2) and then in (3) and (4) we apply the linearity of expectation and sub-additivity of the supremum. In (6) we apply the triangle inequality to the absolute difference between $h$ and $h_0$, and use sub-additivity of the supremum and linearity of expectation again to split it into two expectations. Then in (7) we use the definition of Rademacher complexity to rewrite the first two terms, and the last two require Talagrand's contraction lemma with the fact that the Lipschitz constant of the absolute value function is 1. Simplifying gives the sum of Rademacher complexities of $\mathcal{H}$ and $\mathcal{H}_0$ as desired.
 
 \end{solution}
 
@@ -104,7 +104,7 @@ VC-dimension of finite hypothesis sets. Show that the VC-dimension of a finite h
 \end{problem}
 
 \begin{solution}
-  Let $\mathcal{H}$ be a finite hypothesis set that shatters an instance space $X$. Then each element of $\mathcal{H}$ corresponds to a possible labelling of $X$ and there are $2^{|X|}$ such labellings. Since $\mathcal{H}$ shatters $X$ we require $|\mathcal{H}| \geq 2^{|X|}$, since we need at least as many hypotheses as there are labellings for $X$. Equivalently, $\log_2{|\mathcal{H}|} \geq |X|$ so the largest set $X$ that $\mathcal{H}$ can shatter has size $\log_2 |\mathcal{H}|$ which gives the desired upper bound on the VC-dimension.
+	Let $\mathcal{H}$ be a finite hypothesis set that shatters an instance space $X$. Then each element of $\mathcal{H}$ corresponds to a possible labelling of $X$ and there are $2^{|X|}$ such labellings. Since $\mathcal{H}$ shatters $X$ we require $|\mathcal{H}| \geq 2^{|X|}$, since we need at least as many hypotheses as there are labellings for $X$. Equivalently, $\log_2{|\mathcal{H}|} \geq |X|$ so the largest set $X$ that $\mathcal{H}$ can shatter has size $\log_2 |\mathcal{H}|$ which gives the desired upper bound on the VC-dimension.
 \end{solution}
 
 \subsection*{Exercise 3.3 (VC dimension of closed balls).}
@@ -113,29 +113,29 @@ Show that the VC-dimension of the set of all closed balls in $\mathbb{R}_n$, i.e
 \end{problem}
 
 \begin{solution}
-Fix $r>0$, then the constraint $||x-a||^2<r$ is equivalent to:
-\begin{align*}
-  ||x-a||^2 - r &< 0 \\
-  {(x-a)}^T(x-a) - r &< 0 \\
-  ||x||^2 - 2(x\cdot a) + ||a||^2 - r &< 0 \\
-  \sum_{i=1}^n x_i^2 - 2 \sum_{i=1}^n a_i x_i + \sum_{i=1}^n a_i^2 - r &< 0
-\end{align*}
+	Fix $r>0$, then the constraint $||x-a||^2<r$ is equivalent to:
+	\begin{align*}
+		||x-a||^2 - r                                                        & < 0 \\
+		{(x-a)}^T(x-a) - r                                                   & < 0 \\
+		||x||^2 - 2(x\cdot a) + ||a||^2 - r                                  & < 0 \\
+		\sum_{i=1}^n x_i^2 - 2 \sum_{i=1}^n a_i x_i + \sum_{i=1}^n a_i^2 - r & < 0
+	\end{align*}
 \end{solution}
 
 We will show that there are enough free variables to capture $n+1$ arbitrary points. The last line is equivalent to $WX - B < 0$ with:
 
 \begin{align*}
-  W &= \begin{bmatrix}
-    1 \\
-    -2a_1 \\
-    \ldots \\
-    -2a_n
-   \end{bmatrix} & X = \begin{bmatrix}
-     \sum_{i=1}^n x_i^2 \\
-     x_1 \\
-     \ldots \\
-     x_n
-   \end{bmatrix} &&  B = \sum_{i=1}^n r - a_i^2
+	W & = \begin{bmatrix}
+		      1      \\
+		      -2a_1  \\
+		      \ldots \\
+		      -2a_n
+	      \end{bmatrix} & X = \begin{bmatrix}
+		                          \sum_{i=1}^n x_i^2 \\
+		                          x_1                \\
+		                          \ldots             \\
+		                          x_n
+	                          \end{bmatrix} &  & B = \sum_{i=1}^n r - a_i^2
 \end{align*}
 
 There are n+1 linearly independent equations with n+1 unknowns (1 for each $a_i$ from 1 to n, plus $r$). So the VC dimension of closed balls in $\mathbb{R}^n$ is at most equal to the VC dimension of hyperplanes in $\mathbb{R}^{n+1}$, which is $n+2$.
@@ -144,260 +144,260 @@ There are n+1 linearly independent equations with n+1 unknowns (1 for each $a_i$
 \begin{problem}{Mohri Exercise 3.20}
 Consider the hypothesis family of sine functions: $\mathcal{H} = \{x \to \sin(\omega x): \omega \in \mathbb{R}\}$.
 \begin{enumerate}[label= (\alph*)]
-\item Show that for any $x \in \mathbb{R}$ the points $x$, $2x$, $3x$ and $4x$ cannot be shattered by this family of sine functions.
-\item Show that the VC-dimension of the family of sine functions is infinite. (Hint: show that $\{2^{-i}: i \leq m\}$ can be shattered for any $m > 0$.)
+	\item Show that for any $x \in \mathbb{R}$ the points $x$, $2x$, $3x$ and $4x$ cannot be shattered by this family of sine functions.
+	\item Show that the VC-dimension of the family of sine functions is infinite. (Hint: show that $\{2^{-i}: i \leq m\}$ can be shattered for any $m > 0$.)
 \end{enumerate}
 \end{problem}
 
 \begin{solution}
-\begin{enumerate}[label= (\alph*)]
-  \item Fix $x\in\mathbb{R}$. Consider the dichotomy $\{(x, -), (2x, -), (3x, +), (4x, -)\}$. Assume towards contradiction that $\mathcal{H}$ realises this dichotomy, so there exists $\omega\in\mathbb{R}$ satisfying $\sin(\omega x) < 0$, $\sin(2 \omega x) < 0$, $\sin(3 \omega x) > 0$ and $\sin(4 \omega x) < 0$.
+	\begin{enumerate}[label= (\alph*)]
+		\item Fix $x\in\mathbb{R}$. Consider the dichotomy $\{(x, -), (2x, -), (3x, +), (4x, -)\}$. Assume towards contradiction that $\mathcal{H}$ realises this dichotomy, so there exists $\omega\in\mathbb{R}$ satisfying $\sin(\omega x) < 0$, $\sin(2 \omega x) < 0$, $\sin(3 \omega x) > 0$ and $\sin(4 \omega x) < 0$.
 
-  Using the double angle formulae for sin and cos gives:
-  \begin{align*}
-    \sin(4\omega x) &= 2 \sin(2\omega x)\cos(2\omega x) \\
-    &= 2\sin(2\omega x) (1 - 2\sin^2(\omega x))
-  \end{align*}
+		      Using the double angle formulae for sin and cos gives:
+		      \begin{align*}
+			      \sin(4\omega x) & = 2 \sin(2\omega x)\cos(2\omega x)         \\
+			                      & = 2\sin(2\omega x) (1 - 2\sin^2(\omega x))
+		      \end{align*}
 
-  Since $\sin(4\omega x) < 0$ and $\sin(2\omega x) < 0$ by assumption, $1 - 2\sin^2(\omega x) > 0$ must hold otherwise the right hand side is positive while the left hand side is negative. Therefore $\sin^2(\omega x) < \frac{1}{2}$.
+		      Since $\sin(4\omega x) < 0$ and $\sin(2\omega x) < 0$ by assumption, $1 - 2\sin^2(\omega x) > 0$ must hold otherwise the right hand side is positive while the left hand side is negative. Therefore $\sin^2(\omega x) < \frac{1}{2}$.
 
-  Next we use the triple angle formula for $\sin$ to calculate the following:
-  \begin{align*}
-    \sin(3\omega x) &= \sin(\omega x)(3 - 4\sin^2(\omega x))
-  \end{align*}
+		      Next we use the triple angle formula for $\sin$ to calculate the following:
+		      \begin{align*}
+			      \sin(3\omega x) & = \sin(\omega x)(3 - 4\sin^2(\omega x))
+		      \end{align*}
 
-  Since $\sin(3\omega x) > 0$ and $\sin(\omega x) < 0$, we require $3 - 4\sin^2(\omega x) < 0$ otherwise the left hand side is positive and the right hand side is negative. Therefore $\sin^2(\omega x) > \frac{3}{4}$. This contradicts $\sin^2(\omega x) < \frac{1}{2}$, so there is no $\omega$ such that $\mathcal{H}$ shatters $x$, $2x$, $3x$ and $4x$.
+		      Since $\sin(3\omega x) > 0$ and $\sin(\omega x) < 0$, we require $3 - 4\sin^2(\omega x) < 0$ otherwise the left hand side is positive and the right hand side is negative. Therefore $\sin^2(\omega x) > \frac{3}{4}$. This contradicts $\sin^2(\omega x) < \frac{1}{2}$, so there is no $\omega$ such that $\mathcal{H}$ shatters $x$, $2x$, $3x$ and $4x$.
 
-\item Let $m \in \mathbb{N}$ and consider the points $\{2^{-i}: i \leq m\}$ with arbitrary labels $(y_1, \ldots y_{m}) \in {\{-1, +1\}}^m$. Let $y_i^\prime = \frac{1-y_i}{2}$ and choose $\omega = \pi(1 + \sum_{i=1}^m 2^{i}y_i^\prime)$. We will show that this is sufficient to correctly classify our chosen labels. Then for any $j\in[1,m]$ we have the following:
-    \begin{align*}
-      \omega 2^{-j} &= 2^{-j} \pi\left[1 + \sum_{i=1}^m 2^{i}y_i^\prime\right] \\
-      &= \pi \left[2^{-j} + \sum_{i=1}^m 2^{i-j}y_i^\prime\right] \\
-      &= \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{i-j}y_i^\prime + \sum_{i=j+1}^m 2^{i-j}y_i^\prime \right] \\
-      &= \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime + \sum_{i=1}^{m-j} 2^i y_{i+j}^\prime \right] \\
-      &= \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime\right] + 2\pi \sum_{i=1}^{m-j} 2^{i-1}y_{i+j}^\prime
-    \end{align*}
-  The last term contributes multiples of $2\pi$ to $\omega 2^{-i}$ and so can be ignored. Since $y_i\in\{0,1\}$, the remaining term can be bound in the following way:
+		\item Let $m \in \mathbb{N}$ and consider the points $\{2^{-i}: i \leq m\}$ with arbitrary labels $(y_1, \ldots y_{m}) \in {\{-1, +1\}}^m$. Let $y_i^\prime = \frac{1-y_i}{2}$ and choose $\omega = \pi(1 + \sum_{i=1}^m 2^{i}y_i^\prime)$. We will show that this is sufficient to correctly classify our chosen labels. Then for any $j\in[1,m]$ we have the following:
+		      \begin{align*}
+			      \omega 2^{-j} & = 2^{-j} \pi\left[1 + \sum_{i=1}^m 2^{i}y_i^\prime\right]                                                                    \\
+			                    & = \pi \left[2^{-j} + \sum_{i=1}^m 2^{i-j}y_i^\prime\right]                                                                   \\
+			                    & = \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{i-j}y_i^\prime + \sum_{i=j+1}^m 2^{i-j}y_i^\prime \right]              \\
+			                    & = \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime + \sum_{i=1}^{m-j} 2^i y_{i+j}^\prime \right]        \\
+			                    & = \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime\right] + 2\pi \sum_{i=1}^{m-j} 2^{i-1}y_{i+j}^\prime
+		      \end{align*}
+		      The last term contributes multiples of $2\pi$ to $\omega 2^{-i}$ and so can be ignored. Since $y_i\in\{0,1\}$, the remaining term can be bound in the following way:
 
-  \begin{align*}
-    \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime\right] &\leq \pi \left[ y_j^\prime + \sum_{i=1}^{j} 2^{-i}\right] < \pi(1 + y_j^\prime) \\
-    \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime\right] &> \pi y_j^\prime
-  \end{align*}
+		      \begin{align*}
+			      \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime\right] & \leq \pi \left[ y_j^\prime + \sum_{i=1}^{j} 2^{-i}\right] < \pi(1 + y_j^\prime) \\
+			      \pi \left[2^{-j} + y_j^\prime + \sum_{i=1}^{j-1} 2^{-i}y_{j-i}^\prime\right] & > \pi y_j^\prime
+		      \end{align*}
 
-  Now if $y_j = 1$ then $y_j^\prime = 0$ and $0 < \omega 2^{-j} < \pi$ which implies $\sin(\omega 2^{-j}) > 0$. Similarly, if $y_j = -1$, then $y_j^\prime = 1$, $\pi < \omega 2^{-j} < 2\pi$ and we have that $\sin(\omega 2^{-j}) < 0$ as desired.
+		      Now if $y_j = 1$ then $y_j^\prime = 0$ and $0 < \omega 2^{-j} < \pi$ which implies $\sin(\omega 2^{-j}) > 0$. Similarly, if $y_j = -1$, then $y_j^\prime = 1$, $\pi < \omega 2^{-j} < 2\pi$ and we have that $\sin(\omega 2^{-j}) < 0$ as desired.
 
-\end{enumerate}
+	\end{enumerate}
 \end{solution}
 
 \section*{Stability Theory}
 Recall that a function $f$ is $\lambda$-strongly convex if for all $u, w \in \mathbb{R}^d , \alpha \in [0, 1]$:
 \[f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2 \leq \alpha f(w) + (1 - \alpha)f(u)\]
 \begin{problem}{Exercise 3.5 (Strong convexity)}
-  \begin{enumerate}[label= (\alph*)]
-    \item Prove that $f(w) = \|w\|^2$ is $\lambda$-strongly convex with $\lambda = 2$.
-    \item Give an example of a convex function which is not $\lambda$-strongly convex for any $\lambda > 0$.
-    \item Let $f : \mathbb{R}^d \rightarrow \mathbb{R}$ be convex. Prove that $g(w, \lambda) = f(w) + \frac{\lambda}{2}\|w\|^2$ is $\lambda$-strongly convex.
-    \item Prove that $g$ is $\lambda$-strongly convex if and only if $f(w) = g(w) - \frac{\lambda}{2}\|w\|^2$ is convex.
-  \end{enumerate}
+\begin{enumerate}[label= (\alph*)]
+	\item Prove that $f(w) = \|w\|^2$ is $\lambda$-strongly convex with $\lambda = 2$.
+	\item Give an example of a convex function which is not $\lambda$-strongly convex for any $\lambda > 0$.
+	\item Let $f : \mathbb{R}^d \rightarrow \mathbb{R}$ be convex. Prove that $g(w, \lambda) = f(w) + \frac{\lambda}{2}\|w\|^2$ is $\lambda$-strongly convex.
+	\item Prove that $g$ is $\lambda$-strongly convex if and only if $f(w) = g(w) - \frac{\lambda}{2}\|w\|^2$ is convex.
+\end{enumerate}
 \end{problem}
 
 \begin{solution}
-  \begin{enumerate}[label= (\alph*)]
-      \item We begin by calculating the left hand side of the strong convexity inequality:
-        \begin{align*}
-        &\hphantom{=} ||\alpha w + (1-\alpha)u||^2 + \alpha(1-\alpha)||w-u||^2 \\
-        &= {(\alpha w + (1-\alpha)u)}^T(\alpha w + (1-\alpha)u) + \alpha(1-\alpha){(w-u)}^T(w-u) \\
-        &= \alpha^2||w||^2 + 2\alpha(1-\alpha)(u\cdot w) + {(1-\alpha)}^2||u||^2 + \alpha(1-\alpha)(||w||^2 - 2(u\cdot w) + ||u||^2) \\
-        &= (\alpha^2+\alpha(1-\alpha))||w||^2 + ({(1-\alpha)}^2 + \alpha(1-\alpha))||u||^2 \\
-        &= \alpha||w||^2 + (1-\alpha)||u||^2
-        \end{align*}
-      \item I claim that $f(x) = x^4$ is convex, but not $\lambda$-strongly convex for any $\lambda>0$. We know $f$ is convex since $f^{\prime\prime}(x) = 12x^2 > 0$ for all x.
-        Now to show $f$ is not $\lambda$-strongly convex, choose $x_0=0$, $x_1=w$ and $\alpha=\frac{1}{2}$. Suppose towards contradiction that $f$ is $\lambda$-strongly convex for some $\lambda > 0$. Then the following must hold for all $w\in\mathbb{R}$:
-        \begin{align*}
-          {\left(\frac{w}{2}\right)}^4 + \frac{\lambda}{8}w^2 &\leq \frac{1}{2}w^4 \\
-          \lambda &\leq \frac{8}{w^2}\left(\frac{w^4}{2} - \frac{w^4}{16}\right) = 3.5w^2
-        \end{align*}
-        $\lambda$ is fixed but $w$ was chosen freely so by choosing $w$ arbitrarily close to zero we can obtain a contradiction. To this end, choose $w = \sqrt{\lambda/7}$. Then we have:
-        \[\lambda \leq 3.5\sqrt{\frac{\lambda}{7}}^2 \implies \lambda \leq \frac{\lambda}{2}\]
-        This concludes the proof.
-      \item Let $g = f(w) + \frac{\lambda}{2}||w||^2$, then we can calculate the following: \begin{align*}
-        &\hphantom{=} g(\alpha w + (1-\alpha)u, \lambda) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
-        &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
-        &\leq f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha||w||^2 + (1-\alpha)||u||^2 - \alpha(1-\alpha)||w-u||^2) + \\
-        &\hphantom{\leq} \quad \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
-        &\leq f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha||w||^2 + (1-\alpha)||u||^2) \\
-        &\leq \alpha (f(w) + \frac{\lambda}{2}||w||^2) + (1-\alpha)(f(u) + \frac{\lambda}{2}||u||^2) \\
-        &= \alpha g(w) + (1-\alpha)g(u)
-      \end{align*}
-        We conclude that $g$ is $\lambda$-strongly convex.
-      \item Suppose $f(w) = g(w) - \frac{\lambda}{2}||w||^2$ is convex. We will show that $g$ is $\lambda$-strongly convex:
-        \begin{align*}
-          &\hphantom{=} g(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
-          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
-          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}{(\alpha w + (1-\alpha) u)}^T(\alpha w + (1-\alpha) u) + \\
-          &\hphantom{=} \quad \frac{\lambda}{2}\alpha(1-\alpha){(w-u)}^T(w-u) \\
-          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\left(\alpha^2||w||^2+2\alpha(1-\alpha)(u\cdot w) + {(1-\alpha)}^2||u||^2\right) + \\
-          &\hphantom{=} \quad\frac{\lambda}{2}\alpha(1-\alpha)\left(||w||^2 - 2(u\cdot w) + ||u||^2\right) \\
-          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\left(\alpha^2||w||^2 + {(1-\alpha)}^2||u||^2\right) + \frac{\lambda}{2}\alpha(1-\alpha)\left(||w||^2 + ||u||^2\right) \\
-          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||w||^2\left(\alpha^2 + \alpha(1-\alpha)\right) + \frac{\lambda}{2}||u||^2\left({(1-\alpha)}^2 + \alpha(1-\alpha)\right) \\
-          &= f(\alpha w + (1-\alpha)u) + \frac{\lambda\alpha}{2}||w||^2 + \frac{\lambda(1-\alpha)}{2}||u||^2 \\
-          &\leq \alpha f(w) + (1-\alpha)f(u) + \frac{\lambda\alpha}{2}||w||^2 + \frac{\lambda(1-\alpha)}{2}||u||^2 \\
-          &\leq \alpha (f(w) + \frac{\lambda}{2}||w||^2) + (1-\alpha)(f(u) + \frac{\lambda}{2}||u||^2) \\
-          &= \alpha g(w) + (1-\alpha)g(u)
-        \end{align*}
-        as desired.
+	\begin{enumerate}[label= (\alph*)]
+		\item We begin by calculating the left hand side of the strong convexity inequality:
+		      \begin{align*}
+			       & \hphantom{=} ||\alpha w + (1-\alpha)u||^2 + \alpha(1-\alpha)||w-u||^2                                                       \\
+			       & = {(\alpha w + (1-\alpha)u)}^T(\alpha w + (1-\alpha)u) + \alpha(1-\alpha){(w-u)}^T(w-u)                                     \\
+			       & = \alpha^2||w||^2 + 2\alpha(1-\alpha)(u\cdot w) + {(1-\alpha)}^2||u||^2 + \alpha(1-\alpha)(||w||^2 - 2(u\cdot w) + ||u||^2) \\
+			       & = (\alpha^2+\alpha(1-\alpha))||w||^2 + ({(1-\alpha)}^2 + \alpha(1-\alpha))||u||^2                                           \\
+			       & = \alpha||w||^2 + (1-\alpha)||u||^2
+		      \end{align*}
+		\item I claim that $f(x) = x^4$ is convex, but not $\lambda$-strongly convex for any $\lambda>0$. We know $f$ is convex since $f^{\prime\prime}(x) = 12x^2 > 0$ for all x.
+		      Now to show $f$ is not $\lambda$-strongly convex, choose $x_0=0$, $x_1=w$ and $\alpha=\frac{1}{2}$. Suppose towards contradiction that $f$ is $\lambda$-strongly convex for some $\lambda > 0$. Then the following must hold for all $w\in\mathbb{R}$:
+		      \begin{align*}
+			      {\left(\frac{w}{2}\right)}^4 + \frac{\lambda}{8}w^2 & \leq \frac{1}{2}w^4                                                    \\
+			      \lambda                                             & \leq \frac{8}{w^2}\left(\frac{w^4}{2} - \frac{w^4}{16}\right) = 3.5w^2
+		      \end{align*}
+		      $\lambda$ is fixed but $w$ was chosen freely so by choosing $w$ arbitrarily close to zero we can obtain a contradiction. To this end, choose $w = \sqrt{\lambda/7}$. Then we have:
+		      \[\lambda \leq 3.5\sqrt{\frac{\lambda}{7}}^2 \implies \lambda \leq \frac{\lambda}{2}\]
+		      This concludes the proof.
+		\item Let $g = f(w) + \frac{\lambda}{2}||w||^2$, then we can calculate the following: \begin{align*}
+			       & \hphantom{=} g(\alpha w + (1-\alpha)u, \lambda) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2                              \\
+			       & = f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
+			       & \leq f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha||w||^2 + (1-\alpha)||u||^2 - \alpha(1-\alpha)||w-u||^2) +       \\
+			       & \hphantom{\leq} \quad \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2                                                          \\
+			       & \leq f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha||w||^2 + (1-\alpha)||u||^2)                                     \\
+			       & \leq \alpha (f(w) + \frac{\lambda}{2}||w||^2) + (1-\alpha)(f(u) + \frac{\lambda}{2}||u||^2)                               \\
+			       & = \alpha g(w) + (1-\alpha)g(u)
+		      \end{align*}
+		      We conclude that $g$ is $\lambda$-strongly convex.
+		\item Suppose $f(w) = g(w) - \frac{\lambda}{2}||w||^2$ is convex. We will show that $g$ is $\lambda$-strongly convex:
+		      \begin{align*}
+			       & \hphantom{=} g(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2                                                                                     \\
+			       & = f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2                                               \\
+			       & = f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}{(\alpha w + (1-\alpha) u)}^T(\alpha w + (1-\alpha) u) +                                                                 \\
+			       & \hphantom{=} \quad \frac{\lambda}{2}\alpha(1-\alpha){(w-u)}^T(w-u)                                                                                                      \\
+			       & = f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\left(\alpha^2||w||^2+2\alpha(1-\alpha)(u\cdot w) + {(1-\alpha)}^2||u||^2\right) +                                       \\
+			       & \hphantom{=} \quad\frac{\lambda}{2}\alpha(1-\alpha)\left(||w||^2 - 2(u\cdot w) + ||u||^2\right)                                                                         \\
+			       & = f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\left(\alpha^2||w||^2 + {(1-\alpha)}^2||u||^2\right) + \frac{\lambda}{2}\alpha(1-\alpha)\left(||w||^2 + ||u||^2\right)   \\
+			       & = f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||w||^2\left(\alpha^2 + \alpha(1-\alpha)\right) + \frac{\lambda}{2}||u||^2\left({(1-\alpha)}^2 + \alpha(1-\alpha)\right) \\
+			       & = f(\alpha w + (1-\alpha)u) + \frac{\lambda\alpha}{2}||w||^2 + \frac{\lambda(1-\alpha)}{2}||u||^2                                                                       \\
+			       & \leq \alpha f(w) + (1-\alpha)f(u) + \frac{\lambda\alpha}{2}||w||^2 + \frac{\lambda(1-\alpha)}{2}||u||^2                                                                 \\
+			       & \leq \alpha (f(w) + \frac{\lambda}{2}||w||^2) + (1-\alpha)(f(u) + \frac{\lambda}{2}||u||^2)                                                                             \\
+			       & = \alpha g(w) + (1-\alpha)g(u)
+		      \end{align*}
+		      as desired.
 
-        Now we must prove the converse. To that aim, assume $g$ is $\lambda$-strongly convex. We will now prove that $f$ is convex.
-        \begin{align*}
-          &\hphantom{=} f(\alpha w + (1-\alpha)u) \\
-          &= g(\alpha w + (1-\alpha)u) - \frac{\lambda}{2}||\alpha w + (1-\alpha)u||^2 \\
-          &\leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 - \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
-          &\leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}{(\alpha w + (1-\alpha) u)}^T(\alpha w + (1-\alpha) u) - \\
-          &\hphantom{\leq} \frac{\lambda}{2}\alpha(1-\alpha){(w-u)}^T(w-u) \\
-          &\leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}\left(\alpha^2 ||w||^2 + 2\alpha(1-\alpha)(u \cdot w) + (1-\alpha) ||u||^2\right) - \\
-          &\hphantom{\leq} \frac{\lambda}{2}\alpha(1-\alpha)(||w||^2 - 2(u\cdot w) + ||u||^2) \\
-          &\leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}\left(\alpha^2 ||w||^2 + (1-\alpha) ||u||^2\right) - \frac{\lambda}{2}\alpha(1-\alpha)(||w||^2 + ||u||^2) \\
-          &\leq \alpha g(w) - \frac{\lambda}{2}||w||^2\left(\alpha^2 + \alpha(1-\alpha) \right)  + (1-\alpha)g(u) - \frac{\lambda}{2}||u||^2\left({(1-\alpha)}^2 + \alpha(1-\alpha)\right) \\
-          &\leq \alpha g(w) - \frac{\lambda\alpha}{2}||w||^2  + (1-\alpha)g(u) - \frac{\lambda(1-\alpha)}{2}||u||^2 \\
-          &\leq \alpha \left(g(w) - \frac{\lambda}{2}||w||^2\right) + (1-\alpha)\left(g(u) - \frac{\lambda}{2}||u||^2\right) \\
-          &= \alpha f(w) + (1-\alpha)f(u)
-        \end{align*}
-        so $f$ is convex.
-  \end{enumerate}
+		      Now we must prove the converse. To that aim, assume $g$ is $\lambda$-strongly convex. We will now prove that $f$ is convex.
+		      \begin{align*}
+			       & \hphantom{=} f(\alpha w + (1-\alpha)u)                                                                                                                                          \\
+			       & = g(\alpha w + (1-\alpha)u) - \frac{\lambda}{2}||\alpha w + (1-\alpha)u||^2                                                                                                     \\
+			       & \leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 - \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2                                                 \\
+			       & \leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}{(\alpha w + (1-\alpha) u)}^T(\alpha w + (1-\alpha) u) -                                                                   \\
+			       & \hphantom{\leq} \frac{\lambda}{2}\alpha(1-\alpha){(w-u)}^T(w-u)                                                                                                                 \\
+			       & \leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}\left(\alpha^2 ||w||^2 + 2\alpha(1-\alpha)(u \cdot w) + (1-\alpha) ||u||^2\right) -                                        \\
+			       & \hphantom{\leq} \frac{\lambda}{2}\alpha(1-\alpha)(||w||^2 - 2(u\cdot w) + ||u||^2)                                                                                              \\
+			       & \leq \alpha g(w) + (1-\alpha)g(u) - \frac{\lambda}{2}\left(\alpha^2 ||w||^2 + (1-\alpha) ||u||^2\right) - \frac{\lambda}{2}\alpha(1-\alpha)(||w||^2 + ||u||^2)                  \\
+			       & \leq \alpha g(w) - \frac{\lambda}{2}||w||^2\left(\alpha^2 + \alpha(1-\alpha) \right)  + (1-\alpha)g(u) - \frac{\lambda}{2}||u||^2\left({(1-\alpha)}^2 + \alpha(1-\alpha)\right) \\
+			       & \leq \alpha g(w) - \frac{\lambda\alpha}{2}||w||^2  + (1-\alpha)g(u) - \frac{\lambda(1-\alpha)}{2}||u||^2                                                                        \\
+			       & \leq \alpha \left(g(w) - \frac{\lambda}{2}||w||^2\right) + (1-\alpha)\left(g(u) - \frac{\lambda}{2}||u||^2\right)                                                               \\
+			       & = \alpha f(w) + (1-\alpha)f(u)
+		      \end{align*}
+		      so $f$ is convex.
+	\end{enumerate}
 \end{solution}
 
 \begin{problem}{Exercise 3.6 (Random Variables and Strong Convexity)}
-  Let $X \in \mathbb{R}$ be a discrete vector-valued random variable, with distribution
-  \[
-  \rho(X) =
-  \begin{cases}
-    w, & \text{with probability }\alpha \\
-    u, & \text{with probability }(1 - \alpha)
-  \end{cases}
-  \]
-  \begin{enumerate}
-      \item Find ${E[X]}^2$, $E[X^2]$, $Var(X)$. Show that the expression $E[X^2] - {E[X]}^2 = Var(X)$ corresponds to
-      \[
-      \alpha f(w) + (1 - \alpha) f(u) - f(\alpha w + (1 - \alpha) u) = \alpha (1 - \alpha) \|w - u\|^2
-      \]
-      with $f(w) = w^2$.
+Let $X \in \mathbb{R}$ be a discrete vector-valued random variable, with distribution
+\[
+	\rho(X) =
+	\begin{cases}
+		w, & \text{with probability }\alpha       \\
+		u, & \text{with probability }(1 - \alpha)
+	\end{cases}
+\]
+\begin{enumerate}
+	\item Find ${E[X]}^2$, $E[X^2]$, $Var(X)$. Show that the expression $E[X^2] - {E[X]}^2 = Var(X)$ corresponds to
+	      \[
+		      \alpha f(w) + (1 - \alpha) f(u) - f(\alpha w + (1 - \alpha) u) = \alpha (1 - \alpha) \|w - u\|^2
+	      \]
+	      with $f(w) = w^2$.
 
-      \item Suppose $f$ is $\lambda$-strongly convex. Let $X$ be as above. Show that
-      \[
-      E[f(X)] - f(E[X]) \geq \frac{\lambda}{2} Var(X)
-      \]
-  \end{enumerate}
+	\item Suppose $f$ is $\lambda$-strongly convex. Let $X$ be as above. Show that
+	      \[
+		      E[f(X)] - f(E[X]) \geq \frac{\lambda}{2} Var(X)
+	      \]
+\end{enumerate}
 \end{problem}
 
 \begin{solution}
-  \begin{enumerate}
-    \item
-      \begin{enumerate}
-        \item $E[X] = \alpha w + (1-\alpha)u$ therefore ${E[X]}^2 = ||\alpha w + (1-\alpha)u||^2$
-        \item $E[X^2] = \alpha||w||^2 + (1-\alpha) ||u||^2$
-        \item $\begin{aligned}[t]
-          Var[X] &= E[X^2] - {E[X]}^2 \\
-          &= \alpha||w||^2 + (1-\alpha) ||u||^2 - ||\alpha w + (1-\alpha)u||^2 \\
-          &= \alpha||w||^2 + (1-\alpha) ||u||^2 - {(\alpha w + (1-\alpha)u)}^T(\alpha w + (1-\alpha)u) \\
-          &= \alpha||w||^2 + (1-\alpha) ||u||^2 - \left(\alpha^2||w||^2 -2\alpha(1-\alpha)(u\cdot w) + {(1-\alpha)}^2||u||^2\right) \\
-          &= ||w||^2(\alpha -\alpha^2)+2\alpha(1-\alpha)(u\cdot w) + ||u||^2(1-\alpha-{(1-\alpha)}^2) \\
-          &= ||w||^2\alpha(1 -\alpha)+2\alpha(1-\alpha)(u\cdot w) + ||u||^2\alpha(1 - \alpha) \\
-          &= \alpha(1-\alpha)\left(||w||^2 - 2(u\cdot w) + ||u||^2\right) \\
-          &= \alpha(1-\alpha)||w-u||^2
-          \end{aligned}$
-      \end{enumerate}
-    \item $\begin{aligned}[t]
-      E[f(X)] - f(E[X]) &= \alpha f(w) + (1-\alpha)f(u) - f(\alpha w + (1-\alpha)u) \\
-      &\geq \alpha f(w) + (1-\alpha)f(u) - \alpha f(w) -(1-\alpha)f(u) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
-      &\geq \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 = \frac{\lambda}{2}Var[x]
-      \end{aligned}$
-  \end{enumerate}
+	\begin{enumerate}
+		\item
+		      \begin{enumerate}
+			      \item $E[X] = \alpha w + (1-\alpha)u$ therefore ${E[X]}^2 = ||\alpha w + (1-\alpha)u||^2$
+			      \item $E[X^2] = \alpha||w||^2 + (1-\alpha) ||u||^2$
+			      \item $\begin{aligned}[t]
+					            Var[X] & = E[X^2] - {E[X]}^2                                                                                                      \\
+					                   & = \alpha||w||^2 + (1-\alpha) ||u||^2 - ||\alpha w + (1-\alpha)u||^2                                                      \\
+					                   & = \alpha||w||^2 + (1-\alpha) ||u||^2 - {(\alpha w + (1-\alpha)u)}^T(\alpha w + (1-\alpha)u)                              \\
+					                   & = \alpha||w||^2 + (1-\alpha) ||u||^2 - \left(\alpha^2||w||^2 -2\alpha(1-\alpha)(u\cdot w) + {(1-\alpha)}^2||u||^2\right) \\
+					                   & = ||w||^2(\alpha -\alpha^2)+2\alpha(1-\alpha)(u\cdot w) + ||u||^2(1-\alpha-{(1-\alpha)}^2)                               \\
+					                   & = ||w||^2\alpha(1 -\alpha)+2\alpha(1-\alpha)(u\cdot w) + ||u||^2\alpha(1 - \alpha)                                       \\
+					                   & = \alpha(1-\alpha)\left(||w||^2 - 2(u\cdot w) + ||u||^2\right)                                                           \\
+					                   & = \alpha(1-\alpha)||w-u||^2
+				            \end{aligned}$
+		      \end{enumerate}
+		\item $\begin{aligned}[t]
+				      E[f(X)] - f(E[X]) & = \alpha f(w) + (1-\alpha)f(u) - f(\alpha w + (1-\alpha)u)                                                   \\
+				                        & \geq \alpha f(w) + (1-\alpha)f(u) - \alpha f(w) -(1-\alpha)f(u) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
+				                        & \geq \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 = \frac{\lambda}{2}Var[x]
+			      \end{aligned}$
+	\end{enumerate}
 \end{solution}
 
 \begin{problem}{Exercise 3.7 (Algorithmic Stability for Ridge Regression)}
 Write,
-    \[
-    f(w, S) = \hat{L}_S(w) = \frac{1}{m} \sum_{i=1}^{m} {(w \cdot x_i - y_i)}^2
-    \]
-    Consider the datasets $S_1$, $S_2$, which differ by exactly one data point. Write
-    \[
-    z_1 = (x_1, y_1) \in S_1, \quad z_2 = (x_2, y_2) \in S_2
-    \]
-    for the different points. Define $g(w, S) = f(w, S) + \frac{\lambda}{2} \|w\|^2$ and
-    \[
-    w_i = A(S_i) = \arg\min_w g(w, S_i), \quad i = 1, 2
-    \]
-    \begin{enumerate}
-        \item Explain why $g(w, S)$ is $\lambda$-strongly convex (as a function of $w$).
+\[
+	f(w, S) = \hat{L}_S(w) = \frac{1}{m} \sum_{i=1}^{m} {(w \cdot x_i - y_i)}^2
+\]
+Consider the datasets $S_1$, $S_2$, which differ by exactly one data point. Write
+\[
+	z_1 = (x_1, y_1) \in S_1, \quad z_2 = (x_2, y_2) \in S_2
+\]
+for the different points. Define $g(w, S) = f(w, S) + \frac{\lambda}{2} \|w\|^2$ and
+\[
+	w_i = A(S_i) = \arg\min_w g(w, S_i), \quad i = 1, 2
+\]
+\begin{enumerate}
+	\item Explain why $g(w, S)$ is $\lambda$-strongly convex (as a function of $w$).
 
-        \item Explain how strong convexity is applied to obtain
-        \[
-        g(w_2, S_1) - g(w_1, S_1) \geq \frac{\lambda}{2} \|w_1 - w_2\|^2
-        \]
-        \[
-        g(w_1, S_2) - g(w_2, S_2) \geq \frac{\lambda}{2} \|w_1 - w_2\|^2
-        \]
+	\item Explain how strong convexity is applied to obtain
+	      \[
+		      g(w_2, S_1) - g(w_1, S_1) \geq \frac{\lambda}{2} \|w_1 - w_2\|^2
+	      \]
+	      \[
+		      g(w_1, S_2) - g(w_2, S_2) \geq \frac{\lambda}{2} \|w_1 - w_2\|^2
+	      \]
 
-        \item Simplify to obtain
-        \[
-        \lambda \|w_1 - w_2\|^2 \leq \frac{1}{m} | \ell(w_2, z_1) - \ell(w_1, z_1) + \ell(w_1, z_2) - \ell(w_2, z_2) |
-        \]
-        for $\ell(w, z) = {(w \cdot x - y)}^2$.
+	\item Simplify to obtain
+	      \[
+		      \lambda \|w_1 - w_2\|^2 \leq \frac{1}{m} | \ell(w_2, z_1) - \ell(w_1, z_1) + \ell(w_1, z_2) - \ell(w_2, z_2) |
+	      \]
+	      for $\ell(w, z) = {(w \cdot x - y)}^2$.
 
-        \item Assume that $\|x\| \leq C_x$ and $|y| \leq C_y$ for all data $x$, $y$, and that $\|w_1\|, \|w_2\| \leq C_w$. Bound the RHS of the previous inequality. (Hint: apply the identity $(a^2 - b^2) = (a - b)(a + b)$ to the loss.)
+	\item Assume that $\|x\| \leq C_x$ and $|y| \leq C_y$ for all data $x$, $y$, and that $\|w_1\|, \|w_2\| \leq C_w$. Bound the RHS of the previous inequality. (Hint: apply the identity $(a^2 - b^2) = (a - b)(a + b)$ to the loss.)
 
-        \item Conclude that the Ridge Regression problem is replace one stable (ROS) and give the rate as a function of $\lambda$, $m$.
-    \end{enumerate}
+	\item Conclude that the Ridge Regression problem is replace one stable (ROS) and give the rate as a function of $\lambda$, $m$.
+\end{enumerate}
 \end{problem}
 
 \begin{solution}
-  \begin{enumerate}
-    \item $g$ is $\lambda$-strongly convex by the proof in exercise 3.5(c)
-    \item Since $g$ is $\lambda$-strongly convex, we apply the inequality setting $\alpha=0.5$: \[g(\frac{1}{2} w_1 + \frac{1}{2}w_2, S_1) + \frac{\lambda}{4}||w_1-w_2||^2 \leq \frac{1}{2} g(w_1, S_1) + \frac{1}{2}g(w_2, S_1)\]
+	\begin{enumerate}
+		\item $g$ is $\lambda$-strongly convex by the proof in exercise 3.5(c)
+		\item Since $g$ is $\lambda$-strongly convex, we apply the inequality setting $\alpha=0.5$: \[g(\frac{1}{2} w_1 + \frac{1}{2}w_2, S_1) + \frac{\lambda}{4}||w_1-w_2||^2 \leq \frac{1}{2} g(w_1, S_1) + \frac{1}{2}g(w_2, S_1)\]
 
-      Because $w_1$ minimises $g$ at $S_1$, we have that $g(w_1, S_1) \leq g(\frac{1}{2} w_1 + \frac{1}{2} w_2, S_1)$. So we can substitute $g(w_1, S_1)$ in the left hand side in the following way: \[g(w_1, S_1) + \frac{\lambda}{4}||w_1-w_2||^2 \leq \frac{1}{2}g(w_1, s_1) + \frac{1}{2}g(w_2, S_1)\]
+		      Because $w_1$ minimises $g$ at $S_1$, we have that $g(w_1, S_1) \leq g(\frac{1}{2} w_1 + \frac{1}{2} w_2, S_1)$. So we can substitute $g(w_1, S_1)$ in the left hand side in the following way: \[g(w_1, S_1) + \frac{\lambda}{4}||w_1-w_2||^2 \leq \frac{1}{2}g(w_1, s_1) + \frac{1}{2}g(w_2, S_1)\]
 
-      Subtracting $g(w_1, S_1)$ from both sides of the inequality, and then multiplying both sides by 2 gives the first desired inequality:
-      \[\frac{\lambda}{2}||w_1-w_2||^2 \leq g(w_2,S_1)-g(w_1, S_1)\]
-      We can obtain the other inequality by the same argument, or via symmetry.
-      \[\frac{\lambda}{2}||w_1-w_2||^2 \leq g(w_1,S_2)-g(w_2, S_2)\]
-    \item We start by rewriting the inequalities from the preceding exercise.
-      \begin{align*}
-        \frac{\lambda}{2}||w_1-w_2||^2 \leq g(w_2, z_1)-g(w_1, z_1) \\
-        \frac{\lambda}{2}||w_1-w_2||^2 \leq g(w_1, z_2)-g(w_2, z_2)
-      \end{align*}
-      Then we add both inequalities together to obtain:
-      \begin{align*}
-        \lambda ||w_1-w_2||^2 &\leq (g(w_2,z_1)-g(w_1,z_1)+g(w_1,z_2)-g(w_2,z_2)) \\
-        \hphantom{\lambda ||w_1-w_2||^2} &\leq f(w_2,z_1) + ||w_2||^2 -f(w_1,z_1) - ||w_2||^2 \\
-        \hphantom{\lambda ||w_1-w_2||^2}&+f(w_1,z_2) + ||w_1||^2-f(w_2,z_2) - ||w_1||^2 \\
-        &\leq f(w_2,z_1)-f(w_1,z_1)+f(w_1,z_2)-f(w_2,z_2) \\
-        &\leq \frac{1}{m} (\ell(w_2,z_1)-\ell(w_1,z_1)+\ell(w_1,z_2)-\ell(w_2,z_2))
-      \end{align*}
-      where the last inequality comes from the fact that $f(w_i,S_i) = \frac{1}{m}\ell(w_i, z_i)$.
-    \item We begin by applying the hint with $\ell(w_2,z_1) - \ell(w_1,z_1)$:
-        \begin{align*}
-          \ell(w_2,z_1) - \ell(w_1,z_1) &= {(w_2\cdot x - y)}^2 - {(w_1\cdot x - y)}^2 \\
-          \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} &= (w_2\cdot x - y - w_1\cdot x + y)(w_2\cdot x - y + w_1\cdot x - y) \\
-          \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} &= ((w_2 - w_1)\cdot x)((w_1 + w_2)\cdot x - 2y) \\
-          \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} &\leq (2C_w C_x)(2C_w C_x+2C_y) \\
-          \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} &\leq 2C_w C_x(C_w C_x + C_y)
-        \end{align*}
-        Now we can apply the triangle inequality to the right hand side of the inequality from the previous exercise, and then we will apply our upper bound.
-        \begin{align*}
-          &\hphantom{\leq} \frac{1}{m} |\ell(w_2,z_1)-\ell(w_1,z_1)+\ell(w_1,z_2)-\ell(w_2,z_2)| \\
-          &\leq \frac{1}{m} |\ell(w_2,z_1)-\ell(w_1,z_1)| + \frac{1}{m}|\ell(w_1,z_2)-\ell(w_2,z_2)| \\
-          &\leq \frac{4C_w C_x(C_w C_x + C_y)}{m}
-        \end{align*}
-      \item Since $L(A(Z_1)) - L(A(Z_2))$ can be bounded by function of $m$, the Ridge Regression problem is replace-one-stable (ROS).
+		      Subtracting $g(w_1, S_1)$ from both sides of the inequality, and then multiplying both sides by 2 gives the first desired inequality:
+		      \[\frac{\lambda}{2}||w_1-w_2||^2 \leq g(w_2,S_1)-g(w_1, S_1)\]
+		      We can obtain the other inequality by the same argument, or via symmetry.
+		      \[\frac{\lambda}{2}||w_1-w_2||^2 \leq g(w_1,S_2)-g(w_2, S_2)\]
+		\item We start by rewriting the inequalities from the preceding exercise.
+		      \begin{align*}
+			      \frac{\lambda}{2}||w_1-w_2||^2 \leq g(w_2, z_1)-g(w_1, z_1) \\
+			      \frac{\lambda}{2}||w_1-w_2||^2 \leq g(w_1, z_2)-g(w_2, z_2)
+		      \end{align*}
+		      Then we add both inequalities together to obtain:
+		      \begin{align*}
+			      \lambda ||w_1-w_2||^2            & \leq (g(w_2,z_1)-g(w_1,z_1)+g(w_1,z_2)-g(w_2,z_2))                         \\
+			      \hphantom{\lambda ||w_1-w_2||^2} & \leq f(w_2,z_1) + ||w_2||^2 -f(w_1,z_1) - ||w_2||^2                        \\
+			      \hphantom{\lambda ||w_1-w_2||^2} & +f(w_1,z_2) + ||w_1||^2-f(w_2,z_2) - ||w_1||^2                             \\
+			                                       & \leq f(w_2,z_1)-f(w_1,z_1)+f(w_1,z_2)-f(w_2,z_2)                           \\
+			                                       & \leq \frac{1}{m} (\ell(w_2,z_1)-\ell(w_1,z_1)+\ell(w_1,z_2)-\ell(w_2,z_2))
+		      \end{align*}
+		      where the last inequality comes from the fact that $f(w_i,S_i) = \frac{1}{m}\ell(w_i, z_i)$.
+		\item We begin by applying the hint with $\ell(w_2,z_1) - \ell(w_1,z_1)$:
+		      \begin{align*}
+			      \ell(w_2,z_1) - \ell(w_1,z_1)            & = {(w_2\cdot x - y)}^2 - {(w_1\cdot x - y)}^2                        \\
+			      \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} & = (w_2\cdot x - y - w_1\cdot x + y)(w_2\cdot x - y + w_1\cdot x - y) \\
+			      \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} & = ((w_2 - w_1)\cdot x)((w_1 + w_2)\cdot x - 2y)                      \\
+			      \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} & \leq (2C_w C_x)(2C_w C_x+2C_y)                                       \\
+			      \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} & \leq 2C_w C_x(C_w C_x + C_y)
+		      \end{align*}
+		      Now we can apply the triangle inequality to the right hand side of the inequality from the previous exercise, and then we will apply our upper bound.
+		      \begin{align*}
+			       & \hphantom{\leq} \frac{1}{m} |\ell(w_2,z_1)-\ell(w_1,z_1)+\ell(w_1,z_2)-\ell(w_2,z_2)|     \\
+			       & \leq \frac{1}{m} |\ell(w_2,z_1)-\ell(w_1,z_1)| + \frac{1}{m}|\ell(w_1,z_2)-\ell(w_2,z_2)| \\
+			       & \leq \frac{4C_w C_x(C_w C_x + C_y)}{m}
+		      \end{align*}
+		\item Since $L(A(Z_1)) - L(A(Z_2))$ can be bounded by function of $m$, the Ridge Regression problem is replace-one-stable (ROS).
 
-        The ROS rate, denoted $\beta(m)$ is given by the following:
-        \[
-        \begin{aligned}[t]
-        L(A(Z_1))-L(A(Z_2)) &= \frac{1}{m} |\ell(w_2,z_1)-\ell(w_1,z_1)+\ell(w_1,z_2)-\ell(w_2,z_2)| \\
-        &\leq \frac{4C_w C_x(C_w C_x + C_y)}{m} = \beta(m)
-        \end{aligned}
-        \]
-  \end{enumerate}
+		      The ROS rate, denoted $\beta(m)$ is given by the following:
+		      \[
+			      \begin{aligned}[t]
+				      L(A(Z_1))-L(A(Z_2)) & = \frac{1}{m} |\ell(w_2,z_1)-\ell(w_1,z_1)+\ell(w_1,z_2)-\ell(w_2,z_2)| \\
+				                          & \leq \frac{4C_w C_x(C_w C_x + C_y)}{m} = \beta(m)
+			      \end{aligned}
+		      \]
+	\end{enumerate}
 \end{solution}
 
 %----------------------------------------------------------------------------------------
