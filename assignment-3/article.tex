@@ -202,38 +202,41 @@ $$f(\alpha w + (1 - \alpha)u) + \frac{\lambda}{2} \alpha(1 - \alpha)\|w - u\|^2 
 
 \begin{solution}
   \begin{enumerate}[label=(\alph*)]
-      \item We begin by calculating the left hand side of the strong Jensen's inequality:
+      \item We begin by calculating the left hand side of the strong convexity inequality:
         \begin{align*}
         &\hphantom{=} ||\alpha w + (1-\alpha)u)||^2 + \alpha(1-\alpha)||w-u||^2 \\
         &= (\alpha w + (1-\alpha)u)^T(\alpha w + (1-\alpha)u) + \alpha(1-\alpha)(w-u)^T(w-u) \\
-        &= \alpha^2||w||^2 + 2\alpha(1-\alpha)(u\cdot w) + (1-\alpha)^2||u||^2 + \alpha(1-\alpha)(||w||^2 + 2(u\cdot w) + ||u||^2) \\
-        &= (\alpha^2+\alpha(1-\alpha))||w||^2 + 4\alpha(1-\alpha)(u\cdot w) + ((1-\alpha)^2 + \alpha(1-\alpha))||u||^2 \\
-        &\leq \alpha||w||^2 + 4\alpha(1-\alpha)||u||\cdot ||w|| + (1-\alpha)||u||^2 \\
-        &\leq \alpha||w||^2 + (1-\alpha)||u||^2
+        &= \alpha^2||w||^2 + 2\alpha(1-\alpha)(u\cdot w) + (1-\alpha)^2||u||^2 + \alpha(1-\alpha)(||w||^2 - 2(u\cdot w) + ||u||^2) \\
+        &= (\alpha^2+\alpha(1-\alpha))||w||^2 + ((1-\alpha)^2 + \alpha(1-\alpha))||u||^2 \\
+        &= \alpha||w||^2 + (1-\alpha)||u||^2
         \end{align*}
-        as required.
-      \item I claim that $f(w)=|w|$ is convex, but not $\lambda$-strongly convex for any $\lambda$. By the triangle inequality, the following inequality is tight:
+      \item I claim that $f(x) = x^4$ is convex, but not $\lambda$-strongly convex for any $\lambda>0$. We know $f$ is convex since $f^{\prime\prime}(x) = 12x^2 > 0$ for all x.
+        Now to show $f$ is not $\lambda$-strongly convex, choose $x_0=0$, $x_1=w$ and $\alpha=\frac{1}{2}$. Suppose towards contradiction that $f$ is $\lambda$-strongly convex for some $\lambda > 0$. Then the following must hold for all $w\in\mathbb{R}$:
         \begin{align*}
-          0 &\leq \alpha|w| + (1-\alpha)|u| -|\alpha w + (1-\alpha)u)|
+          \left(\frac{w}{2}\right)^4 + \frac{\lambda}{8}w^2 &\leq \frac{1}{2}w^4 \\
+          \lambda &\leq \frac{8}{w^2}\left(\frac{w^4}{2} - \frac{w^4}{16}\right) = 3.5w^2
         \end{align*}
-        Strong convexity requires we can bound this term below by something quadratic in $||w-u||$ but this is not possible, so $|w|$ is not strongly convex.
-      \item We calculate Jensen's inequality for $g$: \begin{align*}
+        $\lambda$ is fixed but $w$ was chosen freely so by choosing $w$ arbitrarily close to zero we can obtain a contradiction. To this end, choose $w = \sqrt{\lambda/7}$. Then we have:
+        $$\lambda \leq 3.5\sqrt{\frac{\lambda}{7}}^2 \implies \lambda \leq \frac{\lambda}{2} $$
+        This concludes the proof.
+      \item Let $g = f(w) + \frac{\lambda}{2}||w||^2$, then we can calculate the following: \begin{align*}
         &\hphantom{=} g(\alpha w + (1-\alpha)u, \lambda) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
         &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
-        &\leq f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha||w||^2 + (1-\alpha)||u||^2 - \alpha(1-\alpha)||w-u||^2) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
+        &\leq f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha||w||^2 + (1-\alpha)||u||^2 - \alpha(1-\alpha)||w-u||^2) + \\
+        &\hphantom{\leq} \quad \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
         &\leq f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha||w||^2 + (1-\alpha)||u||^2) \\
-        &\leq \alpha (f(w) + \frac{\lambda}{2}||w||^2) + (1-\alpha)(f(u) + \frac{\lambda}{2}||u||^2)
+        &\leq \alpha (f(w) + \frac{\lambda}{2}||w||^2) + (1-\alpha)(f(u) + \frac{\lambda}{2}||u||^2) \\
+        &= \alpha g(w) + (1-\alpha)g(u)
       \end{align*}
-        as required.
-        \newpage
+        We conclude that $g$ is $\lambda$-strongly convex.
       \item Suppose $f(w) = g(w) - \frac{\lambda}{2}||w||^2$ is convex. We will show that $g$ is $\lambda$-strongly convex:
         \begin{align*}
           &\hphantom{=} g(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
           &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||\alpha w + (1-\alpha) u||^2 + \frac{\lambda}{2}\alpha(1-\alpha)||w-u||^2 \\
           &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}(\alpha w + (1-\alpha) u)^T(\alpha w + (1-\alpha) u) + \\
-          &\hphantom{=} \frac{\lambda}{2}\alpha(1-\alpha)(w-u)^T(w-u) \\
+          &\hphantom{=} \quad \frac{\lambda}{2}\alpha(1-\alpha)(w-u)^T(w-u) \\
           &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\left(\alpha^2||w||^2+2\alpha(1-\alpha)(u\cdot w) + (1-\alpha)^2||u||^2\right) + \\
-          &\hphantom{=} \frac{\lambda}{2}\alpha(1-\alpha)\left(||w||^2 - 2(u\cdot w) + ||u||^2\right) \\
+          &\hphantom{=} \quad\frac{\lambda}{2}\alpha(1-\alpha)\left(||w||^2 - 2(u\cdot w) + ||u||^2\right) \\
           &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}\left(\alpha^2||w||^2 + (1-\alpha)^2||u||^2\right) + \frac{\lambda}{2}\alpha(1-\alpha)\left(||w||^2 + ||u||^2\right) \\
           &= f(\alpha w + (1-\alpha)u) + \frac{\lambda}{2}||w||^2\left(\alpha^2 + \alpha(1-\alpha)\right) + \frac{\lambda}{2}||u||^2\left((1-\alpha)^2 + \alpha(1-\alpha)\right) \\
           &= f(\alpha w + (1-\alpha)u) + \frac{\lambda\alpha}{2}||w||^2 + \frac{\lambda(1-\alpha)}{2}||u||^2 \\
