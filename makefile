@@ -1,5 +1,4 @@
 REPO_NAME := $(shell basename `git rev-parse --show-toplevel` | tr '[:upper:]' '[:lower:]')
-DOCKER_REGISTRY := mathematiguy
 IMAGE := ${REPO_NAME}.sif
 RUN ?= singularity exec ${FLAGS} --nv ${IMAGE}
 FLAGS ?=  -B $$(pwd):/code --pwd /code
