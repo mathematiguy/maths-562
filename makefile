@@ -5,9 +5,9 @@ RUN ?= singularity exec ${FLAGS} --nv ${IMAGE}
 FLAGS ?=  -B $$(pwd):/code --pwd /code
 SINGULARITY_ARGS ?=
 
-.PHONY: sandbox container shell root-shell docker docker-push docker-pull enter enter-root
+.PHONY: run clean container shell root-shell
 
-run: assignment-3/article.pdf
+run: assignment-3/article.pdf assignment-4/article.pdf
 
 assignment-3/article.pdf: assignment-3/article.tex
 	${RUN} bash -c "cd assignment-3 && latexmk article.tex -pdf"
@@ -18,10 +18,6 @@ assignment-4/article.pdf: assignment-3/article.tex
 clean:
 	(cd assignment-3 && rm -f article.aux article.fls article.bbl article.log article.toc article.blg article.out article.pdf article.fdb_latexmk)
 	(cd assignment-4 && rm -f article.aux article.fls article.bbl article.log article.toc article.blg article.out article.pdf article.fdb_latexmk)
-
-REMOTE ?= cn-f001
-push:
-	rsync -rvahzP ${IMAGE} ${REMOTE}.server.mila.quebec:${SCRATCH}
 
 container: ${IMAGE}
 ${IMAGE}:
