@@ -6,7 +6,10 @@ SINGULARITY_ARGS ?=
 
 .PHONY: run clean container shell root-shell
 
-run: assignment-3/article.pdf assignment-4/article.pdf
+run: assignment-2/article.pdf assignment-3/article.pdf assignment-4/article.pdf
+
+assignment-2/article.pdf: assignment-2/article.tex
+	${RUN} bash -c "cd assignment-2 && latexmk article.tex -pdf"
 
 assignment-3/article.pdf: assignment-3/article.tex
 	${RUN} bash -c "cd assignment-3 && latexmk article.tex -pdf"
@@ -18,6 +21,7 @@ check:
 	$(RUN) chktex assignment-3/article.tex
 
 clean:
+	(cd assignment-2 && rm -f article.aux article.fls article.bbl article.log article.toc article.blg article.out article.pdf article.fdb_latexmk)
 	(cd assignment-3 && rm -f article.aux article.fls article.bbl article.log article.toc article.blg article.out article.pdf article.fdb_latexmk)
 	(cd assignment-4 && rm -f article.aux article.fls article.bbl article.log article.toc article.blg article.out article.pdf article.fdb_latexmk)
 
