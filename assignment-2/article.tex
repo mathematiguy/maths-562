@@ -1,0 +1,113 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Arsclassica Article
+% LaTeX Template
+% Version 1.1 (1/8/17)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Lorenzo Pantieri (http://www.lorenzopantieri.net) with extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[
+	10pt, % Main document font size
+	a4paper, % Paper type, use 'letterpaper' for US Letter paper
+	oneside, % One page layout (no page indentation)
+	%twoside, % Two page layout (page indentation for binding and different headers)
+	headinclude,footinclude, % Extra spacing for the header and footer
+	BCOR5mm, % Binding correction
+]{scrartcl}
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+\usepackage{mdframed}
+\usepackage{amsmath}
+\DeclareMathOperator*{\argmax}{argmax} % thin space, limits underneath in displays
+\DeclareMathOperator*{\argmin}{argmin} % thin space, limits underneath in displays
+\DeclareMathOperator*{\sig}{sig}
+
+\input{structure.tex} % Include the structure.tex file which specified the document structure and layout
+
+\hyphenation{Fortran hy-phen-ation} % Specify custom hyphenation points in words with dashes where you would like hyphenation to occur, or alternatively, don't put any dashes in a word to stop hyphenation altogether
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND AUTHOR(S)
+%----------------------------------------------------------------------------------------
+
+%\subtitle{Subtitle} % Uncomment to display a subtitle
+
+\author{\spacedlowsmallcaps{Caleb Moses*}} % The article author(s) - author affiliations need to be specified in the AUTHOR AFFILIATIONS block
+
+\date{} % An optional date to appear under the author(s)
+
+
+\newenvironment{problem}[2][]
+{ \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
+		{  \end{mdframed}}
+
+% Define solution environment
+\newenvironment{solution}
+{\textit{Solution:}}
+{}
+
+%----------------------------------------------------------------------------------------
+
+\title{MATH/COMP 562 ASSIGNMENT 2}
+\author{Caleb Moses}
+
+\begin{document}
+
+gin{document}
+
+\maketitle
+
+\section{Rademacher Complexity}
+
+\begin{problem}{Exercise 1.1 (Rademacher complexity of linear hypothesis)}
+Prove the following theorem.
+
+\textbf{(Mohri) Theorem 5.10:} Define $B_r = \{x \in \mathbb{R}^d | ||x|| \leq r\}$. Let $S = \{x_1 , \ldots, x_m\} \subset X \subset \mathbb{R}^d$ with $X = B_r$. Consider the linear hypotheses $h(w, x) = w \cdot x$ and set $H = \{h(x, w) = w \cdot x | x \in X, w \in B_\lambda\}$. Prove that the empirical Rademacher complexity is bounded as follows,
+\[
+	\hat{R}_S(H) \leq \frac{r\lambda}{\sqrt{m}}
+\]
+Hint: refer to class notes, Mohri textbook Theorem 5.10.
+\end{problem}
+
+\begin{solution}
+	Here is a solution
+\end{solution}
+
+\subsection*{Exercise 1.2}
+Given a hypothesis class $H$, of functions $h : X \rightarrow \mathbb{R}$, and a dataset $S = \{x_1 , \ldots, x_m\} \subset X$. Define $\Phi(S) = \sup_{h\in H} |E[h] - \hat{E}_S[h]|$ to be the least upper bound for the generalization gap of a function in $H$. Prove that $\hat{E}_S [\Phi(S)] \leq 2\hat{R}_m(H)$.
+
+\subsection*{Exercise 1.3 (Rademacher Identities)}
+Mohri 3.8(a) and 3.8(b).
+
+\section{Convex Learning Problems}
+Refer to Ch 12 of Understanding Machine Learning (Shalev-Shwartz).
+
+\subsection*{Exercise 1.4 (non convexity of 0\-1 loss)}
+Problem 12.1. Hint: Consider samples in a checkerboard pattern.
+
+\subsection*{Exercise 1.5 (Convexity, Lipschitz, and Smoothness of logistic regression loss)}
+Problem 12.2.
+
+\subsection*{Exercise 1.6 (Lipschitz continuity of the hinge loss)}
+Problem 12.3.
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+%% \bibliography{sample.bib} % The file containing the bibliography
+
+\end{document}
