@@ -374,20 +374,29 @@ Write,
         &\leq \frac{1}{m} (\ell(w_2,z_1)-\ell(w_1,z_1)+\ell(w_1,z_2)-\ell(w_2,z_2))
       \end{align*}
       where the last inequality comes from the fact that $f(w_i,S_i) = \frac{1}{m}\ell(w_i, z_i)$.
-      \item We begin by calculating an upper bound for $\ell(w,z)$: \begin{align*}
-        \ell(w, z) &= (w \cdot x - y)^2 \\
-        &= ||w\cdot x||^2 - 2 (w \cdot x) \cdot y + ||y||^2 \\
-        &\leq ||w||^2 ||x||^2 - 2||w|| ||x|| ||y|| + ||y||^2 \\
-        &\leq ||w||^2 ||x||^2 + ||y||^2 \\
-        &\leq C_w^2C_x^2 + C_y^2
-        \end{align*}
-
-        Now we use the hint:
+    \item We begin by applying the hint with $\ell(w_2,z_1) - \ell(w_1,z_1)$:
         \begin{align*}
           \ell(w_2,z_1) - \ell(w_1,z_1) &= (w_2\cdot x - y)^2 - (w_1\cdot x - y)^2 \\
           \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} &= (w_2\cdot x - y - w_1\cdot x + y)(w_2\cdot x - y + w_1\cdot x - y) \\
-          \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} &= ((w_2 - w_1)\cdot x)((w_1 + w_2)\cdot x - 2y)
+          \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} &= ((w_2 - w_1)\cdot x)((w_1 + w_2)\cdot x - 2y) \\
+          \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} &\leq (2C_wC_x)(2C_wC_x+2C_y) \\
+          \hphantom{\ell(w_2,z_1) - \ell(w_1,z_1)} &\leq 2C_wC_x(C_wC_x + C_y)
         \end{align*}
+        Now we can apply the triangle inequality to the right hand side of the inequality from the previous exercise, and then we will apply our upper bound.
+        \begin{align*}
+          &\hphantom{\leq} \frac{1}{m} |\ell(w_2,z_1)-\ell(w_1,z_1)+\ell(w_1,z_2)-\ell(w_2,z_2)| \\
+          &\leq \frac{1}{m} |\ell(w_2,z_1)-\ell(w_1,z_1)| + \frac{1}{m}|\ell(w_1,z_2)-\ell(w_2,z_2)| \\
+          &\leq \frac{4C_wC_x(C_wC_x + C_y)}{m}
+        \end{align*}
+      \item Since $L(A(Z_1)) - L(A(Z_2))$ can be bounded by function of $m$, the Ridge Regression problem is replace-one-stable (ROS).
+
+        The ROS rate, denoted $\beta(m)$ is given by the following:
+        \[
+        \begin{aligned}[t]
+        L(A(Z_1))-L(A(Z_2)) &= \frac{1}{m} |\ell(w_2,z_1)-\ell(w_1,z_1)+\ell(w_1,z_2)-\ell(w_2,z_2)| \\
+        &\leq \frac{4C_wC_x(C_wC_x + C_y)}{m} = \beta(m)
+        \end{aligned}
+        \]
   \end{enumerate}
 \end{solution}
 
