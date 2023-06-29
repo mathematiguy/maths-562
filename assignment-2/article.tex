@@ -94,11 +94,12 @@ Hint: refer to class notes, Mohri textbook Theorem 5.10.
   Note that we are able to remove the expectation in line (7) since the dependency on $\sigma$ is removed.
 \end{solution}
 
-\subsection*{Exercise 1.2}
-Given a hypothesis class $H$, of functions $h : X \rightarrow \mathbb{R}$, and a dataset $S = \{x_1 , \ldots, x_m\} \subset X$. Define $\Phi(S) = \sup_{h\in H} |E[h] - \hat{E}_S[h]|$ to be the least upper bound for the generalization gap of a function in $H$. Prove that $\hat{E}_S [\Phi(S)] \leq 2\hat{R}_m(H)$.
+\begin{problem}{Exercise 1.2}
+Given a hypothesis class $\mathcal{H}$, of functions $h : X \rightarrow \mathbb{R}$, and a dataset $S = \{x_1 , \ldots, x_m\} \subset X$. Define $\Phi(S) = \sup_{h\in \mathcal{H}} |\mathbb{E}[h] - \hat{\mathbb{E}}_S[h]|$ to be the least upper bound for the generalization gap of a function in $\mathcal{H}$.
 
-\subsection*{Exercise 1.3 (Rademacher Identities)}
-Mohri 3.8(a) and 3.8(b).
+Prove that $\hat{E}_S [\Phi(S)] \leq 2\hat{\mathfrak{R}}_m(\mathcal{H})$.
+\end{problem}
+
 
 \section{Convex Learning Problems}
 Refer to Ch 12 of Understanding Machine Learning (Shalev-Shwartz).
