@@ -100,6 +100,18 @@ Given a hypothesis class $\mathcal{H}$, of functions $h : X \rightarrow \mathbb{
 Prove that $\hat{E}_S [\Phi(S)] \leq 2\hat{\mathfrak{R}}_m(\mathcal{H})$.
 \end{problem}
 
+\begin{solution}
+  Let $S$ and $S^\prime$ be two datasets differing in one point, say $z_m\in S$ and $z_m^\prime \in S^\prime$. We proceed by bounding the expectation $\hat{\mathbb{E}}_S[\Phi(S)]$ as follows:
+  \begin{align*}
+    \hat{\mathbb{E}}_S[\Phi(S)] & = \hat{\mathbb{E}}_S\left[ \sup_{h\in\mathcal{H}} \left| \mathbb{E}[h] - \hat{\mathbb{E}}_S[h] \right| \right]                                                                                       \\
+                                & = \mathbb{E}_S \left[ \sup_{h\in\mathcal{H}} \hat{\mathbb{E}}_{S^\prime}[h] - \hat{\mathbb{E}}_{S}[h] \right]                                                                                        \\
+                                & \leq \mathbb{E}_{S,S^\prime}\left[ \sup_{h\in\mathcal{H}} \hat{\mathbb{E}}_{S^\prime}[h] - \hat{\mathbb{E}}_{S}[h] \right]                                                                           \\
+                                & = \mathbb{E}_{S,S^\prime} \left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m\left(h(z_i^\prime) - h(z_i)\right) \right]                                                                          \\
+                                & = \mathbb{E}_{\sigma, S, S^\prime} \left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i (h(z_i^\prime) - h(z_i)) \right]                                                                  \\
+                                & \leq \mathbb{E}_{\sigma, S^\prime}\left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sigma_i h(z_i^\prime) \right] + \mathbb{E}_{\sigma, S}\left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sigma_i h(z_i) \right] \\
+                                & = 2\mathbb{E}_{\sigma,S}\left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma h(z_i) \right] = 2\hat{\mathfrak{R}}_m(\mathcal{H})
+  \end{align*}
+\end{solution}
 
 \section{Convex Learning Problems}
 Refer to Ch 12 of Understanding Machine Learning (Shalev-Shwartz).
