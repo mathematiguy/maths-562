@@ -73,9 +73,9 @@
 \begin{problem}{Exercise 1.1 (Rademacher complexity of linear hypothesis)}
 Prove the following theorem.
 
-\textbf{(Mohri) Theorem 5.10:} Define $B_r = \{x \in \mathbb{R}^d | ||x|| \leq r\}$. Let $S = \{x_1 , \ldots, x_m\} \subset X \subset \mathbb{R}^d$ with $X = B_r$. Consider the linear hypotheses $h(w, x) = w \cdot x$ and set $H = \{h(x, w) = w \cdot x | x \in X, w \in B_\lambda\}$. Prove that the empirical Rademacher complexity is bounded as follows,
+\textbf{(Mohri) Theorem 5.10:} Define $B_r = \{x \in \mathbb{R}^d: ||x|| \leq r\}$. Let $S = \{x_1 , \ldots, x_m\} \subset X \subset \mathbb{R}^d$ with $X = B_r$. Consider the linear hypotheses $h(w, x) = w \cdot x$ and set $\mathcal{H} = \{h(x, w) = w \cdot x: x \in X, w \in B_\lambda\}$. Prove that the empirical Rademacher complexity is bounded as follows,
 \[
-	\hat{R}_S(H) \leq \frac{r\lambda}{\sqrt{m}}
+  \hat{\mathfrak{R}}_S(H) \leq \frac{r\lambda}{\sqrt{m}}
 \]
 Hint: refer to class notes, Mohri textbook Theorem 5.10.
 \end{problem}
