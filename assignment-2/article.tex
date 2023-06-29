@@ -113,6 +113,35 @@ Prove that $\hat{E}_S [\Phi(S)] \leq 2\hat{\mathfrak{R}}_m(\mathcal{H})$.
   \end{align*}
 \end{solution}
 
+\begin{problem}{Exercise 1.3 (Rademacher Identities)}
+Fix $m\geq 1$. Prove the following identities for any $\alpha \in \mathbb{R}$ and any two hypothesis sets $\mathcal{H}$ and $\mathcal{H^\prime}$ of functions mapping from $\mathcal{X}$ to $\mathcal{R}$.
+\begin{enumerate}[label= (\alph*)]
+  \item $\mathfrak{R}_m(\alpha \mathcal{H}) = |\alpha| \mathfrak{R}_m(\mathcal{H})$.
+  \item $\mathfrak{R}_m(\mathcal{H} + \mathcal{H}^\prime) = \mathfrak{R}_m(\mathcal{H}) + \mathfrak{R}_m(\mathcal{H^\prime})$.
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+  \begin{enumerate}[label= (\alph*)]
+    \item We can bound $\mathfrak{R}_m(\alpha \mathcal{H})$ above and below and establish our result using the squeeze theorem.
+          \begin{align*}
+            \mathbb{E}_\sigma \left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i (-|\alpha| h(z_i)) \right]                & \leq \mathfrak{R}_m(\alpha \mathcal{H}) & \leq \mathbb{E}_\sigma \left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i (|\alpha| h(z_i)) \right] \\
+            \mathbb{E}_{\sigma^\prime} \left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i^\prime (|\alpha| h(z_i)) \right] & \leq \mathfrak{R}_m(\alpha \mathcal{H}) & \leq \mathbb{E}_\sigma \left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i (|\alpha| h(z_i)) \right]
+          \end{align*}
+          Both sides of the last inequality are equal to each other since $\sigma$ and $\sigma^\prime = -\sigma$ are identically distributed. Lastly we use linearity of expectation and the independence of $\alpha$ on $h$ to shift the $|\alpha|$ term outside of the expectation in the following way:
+          \begin{align*}
+            \mathfrak{R}_m(\alpha \mathcal{H}) & = \mathbb{E}_\sigma \left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i (|\alpha| h(z_i)) \right] & = |\alpha| \mathbb{E}_\sigma \left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i h(z_i) \right] \\
+                                               & = |\alpha| \mathfrak{R}_m(\mathcal{H}) \text{ this concludes the proof}
+          \end{align*}
+          \newpage
+    \item We will rely on the fact that $h$ and $h^\prime$ do not depend on one another so maximising the sum is the same as maximising each separately. As a result, we can use the following argument: \begin{align*}
+            \mathfrak{R}_m(\mathcal{H} + \mathcal{H^\prime}) & = \mathbb{E}_\sigma \left[ \sup_{h\in\mathcal{H}, h^\prime \in \mathcal{H}^\prime} \frac{1}{m} \sum_{i=1}^m \sigma_i (h(z_i) + h^\prime (z_i)) \right]                                                                           \\
+                                                             & = \mathbb{E}_\sigma \left[ \sup_{h\in\mathcal{H}} \frac{1}{m} \sum_{i=1}^m \sigma_i (h(z_i)) \right] + \mathbb{E}_\sigma \left[ \sup_{h^\prime \in \mathcal{H}^\prime} \frac{1}{m} \sum_{i=1}^m \sigma_i (h^\prime(z_i)) \right] \\
+                                                             & = \mathfrak{R}_m(\mathcal{H}) + \mathfrak{R}_m(\mathcal{H}^\prime)
+          \end{align*}
+
+  \end{enumerate}
+\end{solution}
 \section{Convex Learning Problems}
 Refer to Ch 12 of Understanding Machine Learning (Shalev-Shwartz).
 
