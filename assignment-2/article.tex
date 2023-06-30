@@ -20,12 +20,12 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass[
-  10pt, % Main document font size
-  a4paper, % Paper type, use 'letterpaper' for US Letter paper
-  oneside, % One page layout (no page indentation)
-  %twoside, % Two page layout (page indentation for binding and different headers)
-  headinclude,footinclude, % Extra spacing for the header and footer
-  BCOR5mm, % Binding correction
+	10pt, % Main document font size
+	a4paper, % Paper type, use 'letterpaper' for US Letter paper
+	oneside, % One page layout (no page indentation)
+	%twoside, % Two page layout (page indentation for binding and different headers)
+	headinclude,footinclude, % Extra spacing for the header and footer
+	BCOR5mm, % Binding correction
 ]{scrartcl}
 \renewcommand{\labelenumii}{\theenumii}
 \renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
@@ -52,7 +52,7 @@
 
 \newenvironment{problem}[2][]
 { \begin{mdframed}[backgroundcolor=gray!20] \textbf{#1 #2} \\}
-    {  \end{mdframed}}
+		{  \end{mdframed}}
 
 % Define solution environment
 \newenvironment{solution}
@@ -157,7 +157,17 @@ Hint: Consider samples in a checkerboard pattern.
 \end{problem}
 
 \begin{solution}
+	Consider three training points in $\mathbb{R}^2$:
+	\[
+		S = \{((0,0), -1), ((0,1), +1), ((1,0), +1)\}
+	\]
+	Let's select a vector $w=(0.5,0.5)$. Define the decision boundary as the hyperplane where $w \cdot x = 0.5$. This classifier $w$ has a loss of $L_S(w) = \frac{1}{3}$ because it misclassifies the point ((0,0),-1).
 
+	Now, for a small $\varepsilon > 0$, consider the $\varepsilon$-ball around $w$. For any vector $w'$ within this ball (i.e., $|w - w'| \leq \varepsilon$), we observe that $L_S(w')$ will not be lower than $L_S(w)$. This is because moving the decision boundary within this $\varepsilon$-ball range won't help in correctly classifying the misclassified point. Therefore, the vector $w$ is a local minimum of $L_S$.
+
+	However, consider another vector $w^\prime=(1,0)$ which defines the decision boundary as the hyperplane where $w^\prime \cdot x = 0.5$. This classifier $w^\prime$ correctly classifies all points in the training set S, and hence, its loss $L_S(w^\prime) = 0$. Therefore, we have $L_S(w^\prime) < L_S(w)$, meaning that the vector $w$ is not a global minimum of $L_S$.
+
+	Thus, we have constructed a training sample S for which the 0-1 loss function has a local minimum but not a global minimum. This satisfies all conditions of the problem.
 \end{solution}
 
 \begin{problem}{Exercise 1.5 (Convexity, Lipschitz, and Smoothness of logistic regression loss)}
@@ -165,9 +175,21 @@ Consider the learning problem of logistic regression: Let $H = X = \{x \in \math
 \end{problem}
 
 \begin{solution}
+	Given the logistic loss function
+	\[\ell(w, (x, y)) = \log(1 + \exp(-y\langle w, x \rangle))\]
 
+	The gradient of the loss function with respect to $w$ is
+	\[\nabla \ell(w, (x, y)) = -\frac{y \exp(-y\langle w, x \rangle)}{1+\exp(-y\langle w, x \rangle)}x = -\frac{y}{1+\exp(y\langle w, x \rangle)}x\]
+
+	Its norm can be bounded by $B$ because $\|x\| \leq B$. Thus, the loss function is B-Lipschitz.
+
+	To evaluate smoothness, we look at the second derivative of the loss function with respect to $w$. The Hessian is given by
+	\[\nabla^2 \ell(w, (x, y)) = \frac{\exp(y\langle w, x \rangle)}{(1+\exp(y\langle w, x \rangle))^2}xx^T\]
+
+	The spectral norm of the Hessian can be bounded by $B^2$ as $\|x\|^2 \leq B^2$. Thus, the loss function is B²-smooth.
+
+	Therefore, the logistic regression loss function is both B-Lipschitz and B²-smooth.
 \end{solution}
-
 
 \begin{problem}{Exercise 1.6 (Lipschitz continuity of the hinge loss)}
 Consider the problem of learning halfspaces with the hinge loss. We limit our domain to the Euclidean ball with radius $R$. That is, $X = \{x : \|x\|_2 \leq R\}$. The label set is $Y = \{\pm1\}$ and the loss function $\ell$ is defined by $\ell(w, (x, y)) = \max\{0, 1 - y\langle w, x \rangle\}$. We already know that the loss function is convex. Show that it is $R$-Lipschitz.
@@ -175,6 +197,26 @@ Consider the problem of learning halfspaces with the hinge loss. We limit our do
 
 \begin{solution}
 
+	A function $f: \mathbb{R}^d \rightarrow \mathbb{R}$ is Lipschitz if there exists a constant $L > 0$ such that
+	\[|f(u) - f(v)| \leq L\|u - v\|\]
+	for all $u, v$ in the domain of $f$.
+
+	Here, we are considering the hinge loss function, given by:
+	\[\ell(w, (x, y)) = \max\{0, 1 - y\langle w, x \rangle\}\]
+
+	To show that the hinge loss function is Lipschitz continuous, we have to prove that the difference in loss values for two distinct inputs $w$ and $w'$ is at most $R$ times the distance between $w$ and $w'$.
+
+	Suppose $w, w' \in \mathbb{R}^d$ and $(x, y) \in X \times Y$, then:
+
+	\begin{align*}
+		| \ell(w, (x, y)) - \ell(w', (x, y)) | & = | \max\{0, 1 - y\langle w, x \rangle\} - \max\{0, 1 - y\langle w', x \rangle\} |                                               \\
+		                                       & \leq | y\langle w, x \rangle - y\langle w', x \rangle | \quad \text{(since max function is Lipschitz with Lipschitz constant 1)} \\
+		                                       & = | y\langle w - w', x \rangle |                                                                                                 \\
+		                                       & \leq \| y(x) \|_2 \| w - w' \|_2 \quad \text{(by Cauchy-Schwarz inequality)}                                                     \\
+		                                       & \leq R \| w - w' \|_2 \quad \text{(since } \| x \|_2 \leq R \text{)}
+	\end{align*}
+
+	Therefore, the hinge loss function $\ell$ is $R$-Lipschitz.
 \end{solution}
 
 %----------------------------------------------------------------------------------------
